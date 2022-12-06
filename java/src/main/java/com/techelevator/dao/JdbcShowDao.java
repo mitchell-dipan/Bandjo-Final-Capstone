@@ -40,9 +40,4 @@ public class JdbcShowDao implements ShowDao{
     public Show getShowById(int showId) {
         return null;
     }
-
-    @Override
-    public List<Show> findShowsByBandName(String bandName) {
-        return null;
-    }
 }

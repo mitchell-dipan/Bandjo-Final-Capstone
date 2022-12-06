@@ -16,6 +16,4 @@ public interface ShowDao {
     Show getShowByShowName(String showName);
 
     Show getShowById(int showId);
-
-    List<Show> findShowsByBandName(String bandName);
 }
