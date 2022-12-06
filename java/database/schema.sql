@@ -1,6 +1,11 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS followers;
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS pictures;
+DROP TABLE IF EXISTS band_genre;
+DROP TABLE IF EXISTS genres;
+DROP TABLE IF EXISTS shows;
 DROP TABLE IF EXISTS bands;
 DROP TABLE IF EXISTS users;
 
@@ -36,7 +41,51 @@ CREATE TABLE followers
 
 CREATE TABLE messages
 (
+	message_date DATE NOT NULL,
+	message_content varchar(1000) NOT NULL,
+	band_id INTEGER NOT NULL,
+	message_id SERIAL NOT NULL,
 	
+	CONSTRAINT PK_message_id PRIMARY KEY (message_id),
+	CONSTRAINT FK_band_id FOREIGN KEY (band_id) REFERENCES bands(band_id)
+);
+
+CREATE TABLE pictures
+(
+	pic_url varchar(1000) NOT NULL,
+	band_id INTEGER NOT NULL,
+	picture_id SERIAL NOT NULL,
+	
+	CONSTRAINT PK_picture_id PRIMARY KEY (picture_id),
+	CONSTRAINT FK_band_id FOREIGN KEY (band_id) REFERENCES bands(band_id)
+);
+
+CREATE TABLE shows
+(
+	show_id SERIAL NOT NULL,
+	band_id INTEGER NOT NULL,
+	show_name varchar(100),
+	show_date DATE NOT NULL,
+	show_location varchar(100) NOT NULL,
+	
+	CONSTRAINT PK_show_id PRIMARY KEY (show_id),
+	CONSTRAINT FK_band_id FOREIGN KEY (band_id) REFERENCES bands(band_id)
+);
+
+CREATE TABLE genres
+(
+	genre_id SERIAL NOT NULL PRIMARY KEY,
+	genre_name varchar(100) NOT NULL
+);
+
+CREATE TABLE band_genre
+(
+	band_id INTEGER NOT NULL,
+	genre_id INTEGER NOT NULL,
+	
+	CONSTRAINT band_id FOREIGN KEY (band_id) REFERENCES bands(band_id),
+	CONSTRAINT genre_id FOREIGN KEY (genre_id) 	REFERENCES genres(genre_id),
+	PRIMARY KEY(band_id, genre_id)
 );
 
 COMMIT TRANSACTION;
