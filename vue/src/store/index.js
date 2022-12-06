@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+// import MessageService from '../services/MessageService'
 
 Vue.use(Vuex)
 
@@ -12,14 +13,23 @@ Vue.use(Vuex)
 const currentToken = localStorage.getItem('token')
 const currentUser = JSON.parse(localStorage.getItem('user'));
 
-if(currentToken != null) {
+if (currentToken != null) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
 }
 
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    messages: [{
+      id: 1,
+      band_id: 20,
+      date: '12/05/2022',
+      content: 'this is a message',
+
+
+    },
+    ]
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -29,7 +39,7 @@ export default new Vuex.Store({
     },
     SET_USER(state, user) {
       state.user = user;
-      localStorage.setItem('user',JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(user));
     },
     LOGOUT(state) {
       localStorage.removeItem('token');
@@ -38,5 +48,6 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     }
+
   }
 })

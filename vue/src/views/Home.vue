@@ -1,12 +1,15 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
+    <message-list></message-list>
   </div>
 </template>
 
 <script>
+import MessageList from "../components/MessageList.vue";
 export default {
-  name: "home"
+  name: "home",
+  components: {
+    MessageList,
+  },
 };
 </script>
