@@ -1,10 +1,11 @@
 <template>
   <main>
-    <div id="login" class="text-center">
+    <img src="../../assets/bandjo-logo-final-removebg-preview.png" />
+    <div id="login">
       <form class="form-signin" @submit.prevent="login">
         <h1 class="h3 mb-3 font-weight-normal">Login</h1>
         <div class="alert alert-danger" role="alert" v-if="invalidCredentials">
-          Invalid username and password!
+          Invalid username or password!
         </div>
         <div
           class="alert alert-success"
@@ -13,7 +14,6 @@
         >
           Thank you for registering, please sign in.
         </div>
-        <label for="username" class="sr-only">Username</label>
         <input
           type="text"
           id="username"
@@ -23,7 +23,6 @@
           required
           autofocus
         />
-        <label for="password" class="sr-only">Password</label>
         <input
           type="password"
           id="password"
@@ -32,8 +31,12 @@
           v-model="user.password"
           required
         />
-        <router-link :to="{ name: 'register' }">Need an account?</router-link>
-        <button type="submit">Sign in</button>
+        <div class="buttons">
+          <router-link :to="{ name: 'register' }" id="new-account"
+            >Register</router-link
+          >
+          <button id="new-account" type="submit">Sign in</button>
+        </div>
       </form>
     </div>
   </main>
@@ -81,30 +84,57 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   height: 90vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 #login {
   display: flex;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px white;
   border-radius: 10px;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 10%;
 }
 .form-signin {
   display: flex;
   flex-direction: column;
-  padding-top: 50%;
-  padding-bottom: 50%;
-  padding-right: 30%;
-  padding-left: 30%;
-  background: rgba(0, 0, 0, 0.5);
 }
 h1 {
   text-align: center;
 }
-.sr-only {
-  padding-top: 10%;
+input,
+button {
+  margin-top: 10%;
 }
-.form-control {
-  padding-bottom: 10%;
+#new-account {
+  text-decoration: none;
+  text-align: center;
+  border-radius: 16px;
+  background: black;
+  color: whitesmoke;
+  font-size: 1.5em;
+}
+
+input {
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px white;
+  border-radius: 16px;
+  text-align: center;
+  padding: 5%;
+}
+input::placeholder {
+  font-size: 16px;
+  text-align: center;
+}
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 10%;
+}
+img {
+  width: 15%;
+  align-self: center;
 }
 </style>
