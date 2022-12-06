@@ -3,8 +3,8 @@
     <img src="../../assets/bandjo-logo-final-removebg-preview.png" />
     <div id="login">
       <form class="form-signin" @submit.prevent="login">
-        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
-        <div class="alert alert-danger" role="alert" v-if="invalidCredentials">
+        <h1>Login</h1>
+        <div role="alert" v-if="invalidCredentials">
           Invalid username or password!
         </div>
         <div
@@ -97,7 +97,7 @@ main {
   padding-right: 10%;
   padding-bottom: 10%;
 }
-.form-signin {
+form {
   display: flex;
   flex-direction: column;
 }

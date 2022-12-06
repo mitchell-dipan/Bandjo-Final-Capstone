@@ -24,11 +24,16 @@ export default new Vuex.Store({
     messages: [{
       id: 1,
       band_id: 20,
+      name: 'Led Zeppelin',
       date: '12/05/2022',
-      content: 'this is a message',
-
-
-    },
+      content: 'The leaves are falling all around, time I was on my way Thanks to you, Im much obliged for such a pleasant stay.But now its time for me to go, the autumn moon lights my way. For now I smell the rain, and with it pain, and its headed my way. Ah, sometimes I grow so tired. But I know Ive got one thing I got to do.'
+    }, {
+      id: 2,
+      band_id: 10,
+      name: 'The Beatles',
+      date: '02/12/2022',
+      content: 'Baby you can drive my car! Yes Im gonna be a star! Baby you can drive my car! And maybe Ill love you!'
+    }
     ]
   },
   mutations: {
