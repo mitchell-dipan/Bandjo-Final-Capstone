@@ -1,35 +1,35 @@
-package com.techelevator.model;
-
-public class Genre {
-
-//    Variables for Genre
-    private int genreId;
-    private String genreName;
-
-//    Constructors
-
-    public Genre(){}
-
-    public Genre(int genreId, String genreName) {
-        this.genreId = genreId;
-        this.genreName = genreName;
-    }
-
-//    Getters/Setters
-
-    public int getGenreId() {
-        return genreId;
-    }
-
-    public void setGenreId(int genreId) {
-        this.genreId = genreId;
-    }
-
-    public String getGenreName() {
-        return genreName;
-    }
-
-    public void setGenreName(String genreName) {
-        this.genreName = genreName;
-    }
-}
+//package com.techelevator.model;
+//
+//public class Genre {
+//
+////    Variables for Genre
+//    private int genreId;
+//    private String genreName;
+//
+////    Constructors
+//
+//    public Genre(){}
+//
+//    public Genre(int genreId, String genreName) {
+//        this.genreId = genreId;
+//        this.genreName = genreName;
+//    }
+//
+////    Getters/Setters
+//
+//    public int getGenreId() {
+//        return genreId;
+//    }
+//
+//    public void setGenreId(int genreId) {
+//        this.genreId = genreId;
+//    }
+//
+//    public String getGenreName() {
+//        return genreName;
+//    }
+//
+//    public void setGenreName(String genreName) {
+//        this.genreName = genreName;
+//    }
+//}
