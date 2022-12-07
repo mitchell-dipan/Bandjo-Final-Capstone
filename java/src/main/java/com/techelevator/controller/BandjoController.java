@@ -1,8 +1,10 @@
 package com.techelevator.controller;
 
 
+import com.techelevator.dao.BandDao;
 import com.techelevator.dao.MessageDao;
 import com.techelevator.dao.UserDao;
+import com.techelevator.model.Band;
 import com.techelevator.model.Message;
 import com.techelevator.model.User;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,10 +24,12 @@ public class BandjoController {
 
     private MessageDao messageDao;
     private UserDao userDao;
+    private BandDao bandDao;
 
-    public BandjoController(MessageDao messageDao, UserDao userDao){
+    public BandjoController(MessageDao messageDao, UserDao userDao, BandDao bandDao){
         this.messageDao = messageDao;
         this.userDao = userDao;
+        this.bandDao = bandDao;
     }
 
     @PreAuthorize("hasRole('USER')")
@@ -34,6 +38,12 @@ public class BandjoController {
 
         User user = userDao.findByUsername(principal.getName());
         return messageDao.findAllMessages(user.getId());
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping(path = "/bands")
+    public List<Band> getBands(){
+        return bandDao.getAllBands();
     }
 
 }

@@ -1,10 +1,13 @@
 import axios from 'axios';
 
-
 export default {
 
     getAllNotifications() {
         return axios.get('/messages');
+    },
+
+    getAllBands() {
+        return axios.get('/bands');
     }
 
     // get(id) {

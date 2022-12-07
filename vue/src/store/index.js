@@ -34,9 +34,12 @@ export default new Vuex.Store({
     //   date: '02/12/2022',
     //   content: 'Baby you can drive my car! Yes Im gonna be a star! Baby you can drive my car! And maybe Ill love you!'
     // }
-    // ]
+    // ],
+    bands: [],
   },
   mutations: {
+
+
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
       localStorage.setItem('token', token);
