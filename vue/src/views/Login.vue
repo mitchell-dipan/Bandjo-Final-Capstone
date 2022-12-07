@@ -3,7 +3,7 @@
     <img src="../../assets/bandjo-logo-final-removebg-preview.png" />
     <div id="login">
       <form class="form-signin" @submit.prevent="login">
-        <h1>Login</h1>
+        <h1>Sign in to Bandjo</h1>
         <div role="alert" v-if="invalidCredentials">
           Invalid username or password!
         </div>
@@ -32,10 +32,13 @@
           required
         />
         <div class="buttons">
-          <router-link :to="{ name: 'register' }" id="new-account"
-            >Register</router-link
-          >
-          <button id="new-account" type="submit">Sign in</button>
+          <button id="sign-in" type="submit">Sign in</button>
+          <p id="new-account">
+            Don't have an account?
+            <router-link :to="{ name: 'register' }" id="sign-up-link"
+              >Sign up</router-link
+            >
+          </p>
         </div>
       </form>
     </div>
@@ -96,32 +99,47 @@ main {
   padding-left: 10%;
   padding-right: 10%;
   padding-bottom: 10%;
+  padding-top: 10%;
+  background-color: white;
 }
-form {
+.form-signin {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 h1 {
   text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
-input,
-button {
-  margin-top: 10%;
+#sign-in {
+  padding: 0.75rem 1.25rem;
+  border-radius: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  overflow: hidden;
+  z-index: 1;
+  background-color: #ef8354;
+}
+#sign-in:hover {
+  background-color: #f36b31;
 }
 #new-account {
-  text-decoration: none;
-  text-align: center;
-  border-radius: 16px;
-  background: black;
-  color: whitesmoke;
-  font-size: 1.5em;
+  margin-top: 10%;
 }
-
+#sign-up-link {
+  text-decoration: none;
+  color: #ef8354;
+}
 input {
   box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px white;
   border-radius: 16px;
   text-align: center;
   padding: 5%;
+  margin-top: 10%;
+  background-color: white;
 }
 input::placeholder {
   font-size: 16px;
@@ -134,7 +152,7 @@ input::placeholder {
   margin-top: 10%;
 }
 img {
-  width: 15%;
+  width: 20%;
   align-self: center;
 }
 </style>

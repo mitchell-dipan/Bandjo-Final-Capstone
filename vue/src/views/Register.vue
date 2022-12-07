@@ -33,10 +33,13 @@
           required
         />
         <div class="buttons">
-          <router-link :to="{ name: 'login' }" id="button-style"
-            >Have an account?</router-link
-          >
           <button type="submit" id="button-style">Create Account</button>
+          <p id="have-account">
+            Have an account?
+            <router-link :to="{ name: 'login' }" id="login-link"
+              >Login</router-link
+            >
+          </p>
         </div>
       </form>
     </div>
@@ -107,47 +110,67 @@ main {
   display: flex;
   box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px white;
   border-radius: 10px;
-  padding-left: 10%;
-  padding-right: 10%;
-  padding-bottom: 10%;
+  padding-left: 8%;
+  padding-right: 8%;
+  padding-bottom: 8%;
+  padding-top: 8%;
+  background-color: white;
 }
-form {
+.form-register {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 h1 {
   text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
-input,
-button {
+input {
   margin-top: 10%;
+  background-color: white;
 }
 .buttons {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  align-items: center;
   margin-top: 10%;
 }
-#button-style {
+#have-account {
+  margin-top: 10%;
+}
+#login-link {
   text-decoration: none;
-  text-align: center;
-  border-radius: 16px;
-  background: black;
-  color: whitesmoke;
-  font-size: 1.5em;
+  color: #ef8354;
+}
+#button-style {
+  padding: 0.75rem 1.25rem;
+  border-radius: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  overflow: hidden;
+  z-index: 1;
+  background-color: #ef8354;
+}
+#button-style:hover {
+  background-color: #f36b31;
 }
 input {
   box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px white;
   border-radius: 16px;
   text-align: center;
   padding: 5%;
+  margin-top: 10%;
+  background-color: white;
 }
 input::placeholder {
   font-size: 16px;
   text-align: center;
 }
 img {
-  width: 15%;
+  width: 20%;
   align-self: center;
 }
 </style>
