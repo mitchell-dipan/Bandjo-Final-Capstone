@@ -6,6 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import BandSearch from '../views/BandSearch'
+import BandPage from '../views/BandPage'
 
 
 Vue.use(Router)
@@ -60,6 +61,14 @@ const router = new Router({
       name: "search-bands",
       component: BandSearch,
       meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/bands/:id",
+      name: "bands-id",
+      component: BandPage,
+      mete: {
         requiresAuth: true
       }
     }

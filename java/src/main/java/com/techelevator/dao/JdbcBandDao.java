@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Band;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.SqlInOutParameter;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
@@ -30,5 +31,20 @@ public class JdbcBandDao implements BandDao{
             bands.add(band);
         }
         return bands;
+    }
+
+    @Override
+    public Band viewBandPage(int id) {
+        String sql = "SELECT name, description, members, user_id, band_id from bands WHERE band_id = ?;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+
+        if (results.next()){
+            Band band = new Band(results.getString("name"),results.getString("description"),
+                    results.getString("members"), results.getInt("user_id"), results.getInt("band_id"));
+            return band;
+        }
+
+        return null;
     }
 }

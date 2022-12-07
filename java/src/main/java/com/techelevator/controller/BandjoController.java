@@ -8,10 +8,7 @@ import com.techelevator.model.Band;
 import com.techelevator.model.Message;
 import com.techelevator.model.User;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -44,6 +41,12 @@ public class BandjoController {
     @GetMapping(path = "/bands")
     public List<Band> getBands(){
         return bandDao.getAllBands();
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping(path = "/bands/{id}")
+    public Band viewBandPage(@PathVariable int id){
+        return bandDao.viewBandPage(id);
     }
 
 }

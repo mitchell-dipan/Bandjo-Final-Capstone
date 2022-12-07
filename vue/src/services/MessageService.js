@@ -8,6 +8,10 @@ export default {
 
     getAllBands() {
         return axios.get('/bands');
+    },
+
+    getBandPage(bandId) {
+        return axios.get(`/bands/${bandId}`);
     }
 
     // get(id) {

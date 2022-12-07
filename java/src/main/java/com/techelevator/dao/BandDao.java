@@ -8,4 +8,6 @@ public interface BandDao {
 
     List<Band> getAllBands();
 
+    Band viewBandPage(int id);
+
 }
