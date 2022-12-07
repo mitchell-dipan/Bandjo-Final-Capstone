@@ -5,6 +5,8 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
+import BandSearch from '../views/BandSearch'
+
 
 Vue.use(Router)
 
@@ -51,6 +53,14 @@ const router = new Router({
       component: Register,
       meta: {
         requiresAuth: false
+      }
+    },
+    {
+      path: "/search-bands",
+      name: "search-bands",
+      component: BandSearch,
+      meta: {
+        requiresAuth: true
       }
     }
   ]

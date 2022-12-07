@@ -3,6 +3,9 @@
     <div id="nav" v-if="$store.state.token != ''">
       <router-link id="link" v-bind:to="{ name: 'home' }">Home</router-link>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <router-link id="link" v-bind:to="{ name: 'search-bands' }"
+        >Search</router-link
+      >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <router-link
         id="link"
         v-bind:to="{ name: 'logout' }"
