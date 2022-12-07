@@ -64,7 +64,4 @@ img {
 #message-box h1 {
   margin-left: 2%;
 }
-#message-box p {
-  align-self: ;
-}
 </style>

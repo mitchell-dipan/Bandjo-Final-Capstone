@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div id="nav" v-if="$store.state.token != ''">
       <router-link id="link" v-bind:to="{ name: 'home' }">Home</router-link>
       <router-link
         id="link"
@@ -13,11 +13,9 @@
   </div>
 </template>
 <style scoped>
-body {
-  margin: 0px;
-}
 #app {
   width: 100%;
+  height: 100%;
   margin: 0 auto;
 }
 #nav {
@@ -25,6 +23,7 @@ body {
   flex-direction: column;
   width: 15%;
   height: 100%;
+  background-color: white;
   box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px white;
 }
 #link {
