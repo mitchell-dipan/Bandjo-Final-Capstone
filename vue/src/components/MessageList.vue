@@ -1,36 +1,39 @@
 <template>
   <main>
     <img src="../../assets/notes_logo.png" />
+
     <div id="message-box" v-for="message in messages" :key="message.id">
       <div class="profile">
         <img src="../../assets/bandjo-logo-final-removebg-preview.png" />
         <h1>{{ message.name }}</h1>
       </div>
-      <h3>{{ message.content }}</h3>
-      <p>Posted on {{ message.date }}</p>
+      <h3>{{ message.messageContent }}</h3>
+      <p>Posted on {{ message.messageDate }}</p>
     </div>
   </main>
 </template>
 
 <script>
-import MessageService from "../services/MessageService";
+import MessageService from "../services/MessageService.js";
 
 export default {
   data() {
     return {
       messages: [],
+      // errorMsg: "",
     };
   },
   created() {
     MessageService.getAllNotifications().then((response) => {
       this.messages = response.data;
     });
-  },
-
-  computed: {
-    setMessages() {
-      return this.$store.state.messages;
-    },
+    // .catch((err) => {
+    //   if (err.response === 201 || err.response === 200) {
+    //     this.errorMsg = "";
+    //   } else {
+    //     this.errorMsg = err.response;
+    //   }
+    // });
   },
 };
 </script>

@@ -29,7 +29,7 @@ public class BandjoController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @GetMapping(path = "/")
+    @GetMapping(path = "/messages")
     public List<Message> getMessages(Principal principal){
 
         User user = userDao.findByUsername(principal.getName());

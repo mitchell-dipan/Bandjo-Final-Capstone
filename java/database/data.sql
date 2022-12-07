@@ -43,3 +43,5 @@ INSERT INTO followers(user_id, band_id) VALUES((SELECT user_id FROM users WHERE 
 INSERT INTO followers(user_id, band_id) VALUES((SELECT user_id FROM users WHERE username = 'jon'), (SELECT band_id FROM bands WHERE name = 'Grateful Dead'));
 COMMIT;
 
+
+
