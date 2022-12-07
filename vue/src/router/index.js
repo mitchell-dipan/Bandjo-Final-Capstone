@@ -66,7 +66,7 @@ const router = new Router({
     },
     {
       path: "/bands/:id",
-      name: "bands-id",
+      name: "page",
       component: BandPage,
       meta: {
         requiresAuth: true

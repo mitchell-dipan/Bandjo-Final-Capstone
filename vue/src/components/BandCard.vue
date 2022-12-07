@@ -18,8 +18,8 @@ export default {
   },
   created() {
     const bandId = parseInt(this.$route.params.id);
-    MessageService.getBandPage(bandId).then((response) => {
-      this.band = response.data;
+    MessageService.getBandPage(bandId).then((r) => {
+      this.band = r.data;
     });
   },
 };
