@@ -88,7 +88,7 @@ main {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 90vh;
+  height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
@@ -98,8 +98,8 @@ main {
   border-radius: 10px;
   padding-left: 10%;
   padding-right: 10%;
-  padding-bottom: 10%;
-  padding-top: 10%;
+  padding-bottom: 5%;
+  padding-top: 5%;
   background-color: white;
 }
 .form-signin {

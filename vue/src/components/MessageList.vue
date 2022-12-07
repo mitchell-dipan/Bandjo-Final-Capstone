@@ -41,9 +41,12 @@ export default {
 <style scoped>
 main {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  margin-left: 20%;
+  width: 70%;
+  border-left: #2d3142 solid 2px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
@@ -51,7 +54,8 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 40%;
+  margin-top: 5%;
+  width: 70%;
 }
 #message-box {
   display: flex;

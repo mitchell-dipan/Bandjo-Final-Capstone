@@ -102,7 +102,7 @@ main {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 90vh;
+  height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
@@ -112,8 +112,8 @@ main {
   border-radius: 10px;
   padding-left: 8%;
   padding-right: 8%;
-  padding-bottom: 8%;
-  padding-top: 8%;
+  padding-bottom: 3%;
+  padding-top: 3%;
   background-color: white;
 }
 .form-register {
