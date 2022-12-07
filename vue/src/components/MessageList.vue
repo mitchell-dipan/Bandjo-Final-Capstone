@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import MessageService from "../services/MessageService";
+
 export default {
   data() {
     return {
@@ -20,7 +22,9 @@ export default {
     };
   },
   created() {
-    this.messages = this.setMessages;
+    MessageService.getAllNotifications().then((response) => {
+      this.messages = response.data;
+    });
   },
 
   computed: {
