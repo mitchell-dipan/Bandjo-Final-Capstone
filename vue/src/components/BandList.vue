@@ -48,8 +48,10 @@ export default {
         filteredBands = filteredBands.filter((band) =>
           band.name.toLowerCase().includes(this.search.bandName.toLowerCase())
         );
+        return filteredBands;
+      } else {
+        return [];
       }
-      return filteredBands;
     },
   },
 };
