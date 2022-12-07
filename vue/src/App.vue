@@ -2,6 +2,7 @@
   <div id="app">
     <div id="nav" v-if="$store.state.token != ''">
       <router-link id="link" v-bind:to="{ name: 'home' }">Home</router-link>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <router-link
         id="link"
         v-bind:to="{ name: 'logout' }"
@@ -20,17 +21,17 @@
 }
 #nav {
   display: flex;
-  flex-direction: column;
-  width: 15%;
+  justify-content: center;
+  width: 100%;
   height: 100%;
-  background-color: white;
-  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px white;
+  background-color: #4f5d75;
+  border-bottom: #2d3142 solid 2px;
 }
 #link {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   text-decoration: none;
-  color: black;
+  color: white;
   font-size: 2em;
 }
 </style>
