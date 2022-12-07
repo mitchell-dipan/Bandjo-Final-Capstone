@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import BandCard from "../components/BandCard";
+import BandCard from "../components/BandCard.vue";
 export default {
   name: "band-page",
   components: {
