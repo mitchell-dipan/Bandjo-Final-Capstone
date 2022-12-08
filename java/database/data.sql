@@ -61,5 +61,31 @@ INSERT INTO shows(band_id, show_name, show_date, show_location) VALUES ((SELECT 
 INSERT INTO shows(band_id, show_name, show_date, show_location) VALUES ((SELECT band_id FROM bands WHERE name = 'Grateful Dead'), 'YOOOOOOO', '05/30/23', 'Cincinnati, OH');
 COMMIT;
 
+BEGIN TRANSACTION;
+INSERT INTO genres(genre_name) VALUES('Rock');
+INSERT INTO genres(genre_name) VALUES('Country');
+INSERT INTO genres(genre_name) VALUES('EDM');
+INSERT INTO genres(genre_name) VALUES('Psychadelia');
+INSERT INTO genres(genre_name) VALUES('Pop');
+INSERT INTO genres(genre_name) VALUES('Punk');
+INSERT INTO genres(genre_name) VALUES('Blues');
+INSERT INTO genres(genre_name) VALUES('Jazz');
+INSERT INTO genres(genre_name) VALUES('Funk');
+INSERT INTO genres(genre_name) VALUES('Folk');
+COMMIT;
 
+BEGIN TRANSACTION;
+INSERT INTO band_genre(band_id, genre_id) VALUES((SELECT band_id FROM bands WHERE name = 'Led Zeppelin'), (SELECT genre_id FROM genres WHERE genre_name = 'Rock'));
+INSERT INTO band_genre(band_id, genre_id) VALUES((SELECT band_id FROM bands WHERE name = 'Led Zeppelin'), (SELECT genre_id FROM genres WHERE genre_name = 'Blues'));
+INSERT INTO band_genre(band_id, genre_id) VALUES((SELECT band_id FROM bands WHERE name = 'Led Zeppelin'), (SELECT genre_id FROM genres WHERE genre_name = 'Folk'));
+INSERT INTO band_genre(band_id, genre_id) VALUES((SELECT band_id FROM bands WHERE name = 'The Beatles'), (SELECT genre_id FROM genres WHERE genre_name = 'Rock'));
+INSERT INTO band_genre(band_id, genre_id) VALUES((SELECT band_id FROM bands WHERE name = 'The Beatles'), (SELECT genre_id FROM genres WHERE genre_name = 'Blues'));
+INSERT INTO band_genre(band_id, genre_id) VALUES((SELECT band_id FROM bands WHERE name = 'The Beatles'), (SELECT genre_id FROM genres WHERE genre_name = 'Psychadelia'));
+INSERT INTO band_genre(band_id, genre_id) VALUES((SELECT band_id FROM bands WHERE name = 'The Beatles'), (SELECT genre_id FROM genres WHERE genre_name = 'Folk'));
+INSERT INTO band_genre(band_id, genre_id) VALUES((SELECT band_id FROM bands WHERE name = 'Grateful Dead'), (SELECT genre_id FROM genres WHERE genre_name = 'Rock'));
+INSERT INTO band_genre(band_id, genre_id) VALUES((SELECT band_id FROM bands WHERE name = 'Grateful Dead'), (SELECT genre_id FROM genres WHERE genre_name = 'Blues'));
+INSERT INTO band_genre(band_id, genre_id) VALUES((SELECT band_id FROM bands WHERE name = 'Grateful Dead'), (SELECT genre_id FROM genres WHERE genre_name = 'Folk'));
+INSERT INTO band_genre(band_id, genre_id) VALUES((SELECT band_id FROM bands WHERE name = 'Grateful Dead'), (SELECT genre_id FROM genres WHERE genre_name = 'Country'));
+INSERT INTO band_genre(band_id, genre_id) VALUES((SELECT band_id FROM bands WHERE name = 'Grateful Dead'), (SELECT genre_id FROM genres WHERE genre_name = 'Psychadelia'));
+COMMIT;
 
