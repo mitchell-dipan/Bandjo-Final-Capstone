@@ -4,18 +4,19 @@
       <img v-bind:src="band.profilePic" />
       <div class="title-members">
         <h1>{{ band.name }}</h1>
+        <p id="description">{{ band.description }}</p>
         <p>Members: {{ band.members }}</p>
+        <div class="genre-box">
+          <ul v-for="genre in genres" v-bind:key="genre.id">
+            <li>{{ genre.genreName }}</li>
+          </ul>
+        </div>
       </div>
     </div>
-    <p>{{ band.description }}</p>
-
     <ul v-for="show in shows" v-bind:key="show.id">
       <li>
         {{ show.showName }} / {{ show.showLocation }} / {{ show.showDate }}
       </li>
-    </ul>
-    <ul v-for="genre in genres" v-bind:key="genre.id">
-      <li>{{ genre.genreName }}</li>
     </ul>
     <div class="gallery">
       <h2>Gallery</h2>
@@ -80,6 +81,7 @@ export default {
 .profile img {
   border: solid black 2px;
   border-radius: 100%;
+  object-fit: cover;
   width: 20%;
   align-self: flex-start;
   margin-top: 2%;
@@ -91,8 +93,26 @@ export default {
   margin-left: 2%;
 }
 .title-members p {
-  margin-top: 5%;
+  margin-top: 2%;
   font-size: 2em;
+}
+#description {
+  font-style: italic;
+}
+.genre-box {
+  display: flex;
+  margin-top: 4%;
+}
+.genre-box li {
+  list-style: none;
+  padding-right: 2vw;
+  padding-left: 2vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  background-color: #ef8354;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
 }
 .gallery {
   display: flex;
@@ -111,7 +131,7 @@ export default {
   display: flex;
   align-self: flex-start;
   flex-wrap: wrap;
-  width: 35vw;
+  width: 70vw;
 }
 .picture-gallery li {
   list-style: none;
