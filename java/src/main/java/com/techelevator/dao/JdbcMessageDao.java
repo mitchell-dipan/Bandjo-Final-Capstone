@@ -27,7 +27,8 @@ public class JdbcMessageDao implements MessageDao {
                 "FROM messages AS m\n" +
                 "\tJOIN bands AS b ON m.band_id = b.band_id\n" +
                 "\tJOIN followers AS f ON f.band_id = b.band_id\n" +
-                "WHERE f.user_id = ?;";
+                "WHERE f.user_id = ?\n" +
+                "ORDER BY message_date DESC;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, user_id);
         while (results.next()){
             Message message = mapRowToMessage(results);
