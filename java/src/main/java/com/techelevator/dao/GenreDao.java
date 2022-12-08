@@ -12,4 +12,6 @@ public interface GenreDao {
 
     Genre getGenreByGenreName(String genreName);
 
+    List<Genre> getGenreByBandId(int id);
+
 }

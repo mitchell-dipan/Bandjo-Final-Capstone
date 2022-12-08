@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -29,6 +30,21 @@ public class JdbcGenreDao implements GenreDao{
     @Override
     public Genre getGenreByGenreName(String genreName) {
         return null;
+    }
+
+    @Override
+    public List<Genre> getGenreByBandId(int id) {
+        String sql = "SELECT g.genre_id, genre_name\n" +
+                "FROM genres as g\n" +
+                "\tJOIN band_genre AS bg ON bg.genre_id = g.genre_id\n" +
+                "WHERE bg.band_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+        List<Genre> genres = new ArrayList<>();
+        while(results.next()){
+            Genre genre = mapRowToGenre(results);
+            genres.add(genre);
+        }
+        return genres;
     }
 
     private Genre mapRowToGenre(SqlRowSet rowSet){
