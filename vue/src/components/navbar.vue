@@ -1,5 +1,6 @@
 <template>
   <div id="nav" v-if="$store.state.token != ''">
+    <img src="../../assets/bandjo-logo-final-removebg-preview.png" />
     <router-link id="link" v-bind:to="{ name: 'home' }">Home</router-link>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <router-link id="link" v-bind:to="{ name: 'search-bands' }"
@@ -27,6 +28,9 @@ export default {};
   width: 20%;
   height: 100vh;
   background-color: #2d3142;
+}
+img {
+  width: 50%;
 }
 #link:first-child {
   margin-top: 25%;
