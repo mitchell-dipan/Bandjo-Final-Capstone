@@ -12,16 +12,18 @@ public class Message {
     private int bandId;
     private int messageId;
     private String name;
+    private String profilePic;
 
 //    Constructor
 
 
-    public Message(LocalDate messageDate, String messageContent, int bandId, int messageId, String name) {
+    public Message(LocalDate messageDate, String messageContent, int bandId, int messageId, String name, String profilePic) {
         this.messageDate = messageDate;
         this.messageContent = messageContent;
         this.bandId = bandId;
         this.messageId = messageId;
         this.name = name;
+        this.profilePic = profilePic;
     }
 
 //    Getters
@@ -44,5 +46,9 @@ public class Message {
 
     public int getMessageId() {
         return messageId;
+    }
+
+    public String getProfilePic(){
+        return profilePic;
     }
 }
