@@ -78,6 +78,7 @@ export default {
 }
 .picture-gallery > li {
   flex-basis: 350px;
+  list-style: none;
 }
 .picture-gallery li img {
   object-fit: cover;

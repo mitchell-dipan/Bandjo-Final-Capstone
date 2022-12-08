@@ -46,6 +46,8 @@ COMMIT;
 BEGIN TRANSACTION;
 INSERT INTO pictures(band_id, pic_url) VALUES((SELECT band_id FROM bands WHERE name = 'Led Zeppelin'), 'https://www.rollingstone.com/wp-content/uploads/2012/11/LedZeppelin.jpg');
 INSERT INTO pictures(band_id, pic_url) VALUES((SELECT band_id FROM bands WHERE name = 'Led Zeppelin'), 'https://www.udiscovermusic.com/wp-content/uploads/2020/11/Led-Zeppelin-GettyImages-84848509-1000x600.jpg');
+INSERT INTO pictures(band_id, pic_url) VALUES((SELECT band_id FROM bands WHERE name = 'Led Zeppelin'), 'https://townsquare.media/site/366/files/2021/04/robert-plant-jimmy-page-led-zeppelin-1975.jpg?w=1200&h=0&zc=1&s=0&a=t&q=89');
+INSERT INTO pictures(band_id, pic_url) VALUES((SELECT band_id FROM bands WHERE name = 'Led Zeppelin'), 'https://media.gq-magazine.co.uk/photos/5f6a28e8c32ccc672f945c2f/master/pass/20200922-led-cars-02.jpg');
 INSERT INTO pictures(band_id, pic_url) VALUES((SELECT band_id FROM bands WHERE name = 'The Beatles'), 'https://media.gq-magazine.co.uk/photos/634d5e48bd70b3f668459a4f/master/pass/Beatles%20Revolver%20remix%201710%20header_01.jpg');
 INSERT INTO pictures(band_id, pic_url) VALUES((SELECT band_id FROM bands WHERE name = 'The Beatles'), 'https://d.newsweek.com/en/full/1580370/beatles.jpg');
 INSERT INTO pictures(band_id, pic_url) VALUES((SELECT band_id FROM bands WHERE name = 'Grateful Dead'), 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Grateful_Dead_%281970%29.png');
