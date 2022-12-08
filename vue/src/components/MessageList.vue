@@ -3,12 +3,17 @@
     <div class="timeline-box">
       <img id="notes-logo" src="../../assets/notes-logo.png" />
       <div id="message-box" v-for="message in messages" :key="message.id">
-        <div class="top-row">
-          <img src="../../assets/bandjo-logo-final-removebg-preview.png" />
-          <h1>{{ message.name }}</h1>
-          <p>Posted on {{ message.messageDate }}</p>
-        </div>
-        <p id="message">{{ message.messageContent }}</p>
+        <router-link
+          id="link"
+          :to="{ name: 'page', params: { id: message.bandId } }"
+        >
+          <div class="top-row">
+            <img v-bind:src="message.profilePic" />
+            <h1>{{ message.name }}</h1>
+            <p>Posted on {{ message.messageDate }}</p>
+          </div>
+          <p id="message">{{ message.messageContent }}</p>
+        </router-link>
       </div>
     </div>
   </main>
@@ -99,5 +104,9 @@ main {
 #notes-logo {
   align-self: center;
   width: 20%;
+}
+
+#link {
+  text-decoration: none;
 }
 </style>
