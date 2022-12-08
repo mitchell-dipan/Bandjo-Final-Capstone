@@ -1,8 +1,13 @@
 <template>
   <div class="card">
-    <img id="prof-pic" src="" />
-    <h1>{{ band.name }}</h1>
-    <h2>{{ band.members }}</h2>
+    <div class="profile">
+      <img v-bind:src="band.profilePic" />
+      <div class="title-members">
+        <h1>{{ band.name }}</h1>
+        <p>{{ band.description }}</p>
+      </div>
+    </div>
+    <h2>Members: {{ band.members }}</h2>
     <p>{{ band.description }}</p>
 
     <ul v-for="show in shows" v-bind:key="show.id">
@@ -13,13 +18,11 @@
     <ul v-for="genre in genres" v-bind:key="genre.id">
       <li>{{ genre.genreName }}</li>
     </ul>
-    <ul
-      v-for="picture in pictures"
-      v-bind:key="picture.id"
-      class="picture-gallery"
-    >
-      <li><img v-bind:src="picture.pic_url" /></li>
-    </ul>
+    <div class="picture-gallery">
+      <ul v-for="picture in pictures" v-bind:key="picture.id">
+        <li><img v-bind:src="picture.pic_url" /></li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -66,29 +69,33 @@ export default {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
-#prof-pic {
+.profile {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.profile img {
   border: solid black 2px;
   border-radius: 100%;
+  width: 20%;
+  align-self: flex-start;
+  margin-top: 2%;
+}
+.profile h1 {
+  margin-left: 5%;
+  font-size: 3em;
 }
 .picture-gallery {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
+  width: 45vw;
 }
-.picture-gallery > li {
-  flex-basis: 350px;
+.picture-gallery li {
   list-style: none;
 }
 .picture-gallery li img {
+  width: 15vw;
+  height: 30vh;
   object-fit: cover;
-  max-width: 50%;
-  height: auto;
-  vertical-align: middle;
-  border-radius: 5px;
-}
-.picture-gallery::after {
-  content: "";
-  flex-basis: 350px;
 }
 </style>
