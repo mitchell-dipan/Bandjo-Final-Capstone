@@ -6,6 +6,9 @@
     <router-link id="link" v-bind:to="{ name: 'search-bands' }"
       >Search</router-link
     >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <router-link id="link" :to="{ name: 'create-band' }"
+      >Create Band</router-link
+    >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <router-link
       id="link"
       v-bind:to="{ name: 'logout' }"
