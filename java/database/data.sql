@@ -43,5 +43,23 @@ INSERT INTO followers(user_id, band_id) VALUES((SELECT user_id FROM users WHERE 
 INSERT INTO followers(user_id, band_id) VALUES((SELECT user_id FROM users WHERE username = 'jon'), (SELECT band_id FROM bands WHERE name = 'Grateful Dead'));
 COMMIT;
 
+BEGIN TRANSACTION;
+INSERT INTO pictures(band_id, pic_url) VALUES((SELECT band_id FROM bands WHERE name = 'Led Zeppelin'), 'https://www.rollingstone.com/wp-content/uploads/2012/11/LedZeppelin.jpg');
+INSERT INTO pictures(band_id, pic_url) VALUES((SELECT band_id FROM bands WHERE name = 'Led Zeppelin'), 'https://www.udiscovermusic.com/wp-content/uploads/2020/11/Led-Zeppelin-GettyImages-84848509-1000x600.jpg');
+INSERT INTO pictures(band_id, pic_url) VALUES((SELECT band_id FROM bands WHERE name = 'The Beatles'), 'https://media.gq-magazine.co.uk/photos/634d5e48bd70b3f668459a4f/master/pass/Beatles%20Revolver%20remix%201710%20header_01.jpg');
+INSERT INTO pictures(band_id, pic_url) VALUES((SELECT band_id FROM bands WHERE name = 'The Beatles'), 'https://d.newsweek.com/en/full/1580370/beatles.jpg');
+INSERT INTO pictures(band_id, pic_url) VALUES((SELECT band_id FROM bands WHERE name = 'Grateful Dead'), 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Grateful_Dead_%281970%29.png');
+INSERT INTO pictures(band_id, pic_url) VALUES((SELECT band_id FROM bands WHERE name = 'Grateful Dead'), 'https://media.newyorker.com/photos/590966551c7a8e33fb38d5b4/master/w_2560%2Cc_limit/121126_r22861_g2048.jpg');
+COMMIT;
+
+BEGIN TRANSACTION;
+INSERT INTO shows(band_id, show_name, show_date, show_location) VALUES ((SELECT band_id FROM bands WHERE name = 'Led Zeppelin'), 'Get The Led Out', '12/05/2023', 'Red Rocks, CO');
+INSERT INTO shows(band_id, show_name, show_date, show_location) VALUES ((SELECT band_id FROM bands WHERE name = 'Led Zeppelin'), 'Lost in Time', '10/30/23', 'The Gorge, WA');
+INSERT INTO shows(band_id, show_name, show_date, show_location) VALUES ((SELECT band_id FROM bands WHERE name = 'The Beatles'), 'We Live Once More', '01/12/24', 'The Armory, MI');
+INSERT INTO shows(band_id, show_name, show_date, show_location) VALUES ((SELECT band_id FROM bands WHERE name = 'The Beatles'), 'throwback', '10/04/98', 'Columbus, OH');
+INSERT INTO shows(band_id, show_name, show_date, show_location) VALUES ((SELECT band_id FROM bands WHERE name = 'Grateful Dead'), 'Jammin', '07/10/22', 'Boulder, Co');
+INSERT INTO shows(band_id, show_name, show_date, show_location) VALUES ((SELECT band_id FROM bands WHERE name = 'Grateful Dead'), 'YOOOOOOO', '05/30/23', 'Cincinnati, OH');
+COMMIT;
+
 
 
