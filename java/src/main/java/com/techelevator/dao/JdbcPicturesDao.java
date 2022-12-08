@@ -19,7 +19,7 @@ public class JdbcPicturesDao implements PicturesDao {
 
     @Override
     public List<Pictures> getPicturesByBandId(int id) {
-        String sql = "SELECT pic_url\n" +
+        String sql = "SELECT pic_url, band_id, picture_id\n" +
                 "from pictures\n" +
                 "WHERE band_id = ?;";
 

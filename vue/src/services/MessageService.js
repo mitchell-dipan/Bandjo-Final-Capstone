@@ -12,6 +12,15 @@ export default {
 
     getBandPage(id) {
         return axios.get(`/bands/${id}`);
+    },
+    getGenres(id) {
+        return axios.get(`/bands/${id}/genres`)
+    },
+    getPictures(id) {
+        return axios.get(`/bands/${id}/pictures`)
+    },
+    getShows(id) {
+        return axios.get(`/bands/${id}/shows`)
     }
 
     // get(id) {
