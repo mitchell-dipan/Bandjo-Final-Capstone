@@ -68,4 +68,6 @@ public class BandjoController {
     public List<Show> getShowsByBandId(@PathVariable int id){
         return showDao.getShowsByBandId(id);
     }
+
+
 }

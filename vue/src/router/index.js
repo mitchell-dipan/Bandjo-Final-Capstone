@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import BandSearch from '../views/BandSearch'
 import BandPage from '../views/BandPage'
+import MakeBand from '../views/MakeBand.vue'
 
 
 Vue.use(Router)
@@ -71,7 +72,15 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }
+    },
+    {
+      path: "/create",
+      name: "create-band",
+      component: MakeBand,
+      meta: {
+        requiresAuth: true
+      }
+    },
   ]
 })
 
