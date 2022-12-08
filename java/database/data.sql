@@ -15,9 +15,9 @@ COMMIT;
 
 
 BEGIN TRANSACTION;
-INSERT INTO bands(name, description, members, user_id) VALUES ('Led Zeppelin', 'John Bonham, Jimmy Page', 'Cool dudes playing good music', (SELECT user_id FROM users WHERE username = 'jack'));
-INSERT INTO bands(name, description, members, user_id) VALUES ('The Beatles', 'John Lennon, Ringo Star', 'Old People with basic music', (SELECT user_id FROM users WHERE username = 'matt'));
-INSERT INTO bands(name, description, members, user_id) VALUES ('Grateful Dead', 'Jerry Garcia', 'Jam band galor', (SELECT user_id FROM users WHERE username = 'mitch'));
+INSERT INTO bands(name, description, members, user_id, profile_pic) VALUES ('Led Zeppelin', 'John Bonham, Jimmy Page', 'Cool dudes playing good music', (SELECT user_id FROM users WHERE username = 'jack'),'https://extrachill.com/wp-content/uploads/2021/03/led-zeppelin-logos.jpeg');
+INSERT INTO bands(name, description, members, user_id, profile_pic) VALUES ('The Beatles', 'John Lennon, Ringo Star', 'Old People with basic music', (SELECT user_id FROM users WHERE username = 'matt'),'https://cdn.mos.cms.futurecdn.net/PiGbPUZRaSxnGqK582evgm-1200-80.jpg');
+INSERT INTO bands(name, description, members, user_id, profile_pic) VALUES ('Grateful Dead', 'Jerry Garcia', 'Jam band galor', (SELECT user_id FROM users WHERE username = 'mitch'), 'https://logos-world.net/wp-content/uploads/2021/08/Grateful-Dead-Logo.png');
 COMMIT;
 
 

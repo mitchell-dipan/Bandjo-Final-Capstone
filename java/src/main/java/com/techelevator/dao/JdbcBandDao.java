@@ -20,14 +20,15 @@ public class JdbcBandDao implements BandDao{
 
     @Override
     public List<Band> getAllBands() {
-        String sql = "SELECT name, description, members, user_id, band_id " +
+        String sql = "SELECT name, description, members, user_id, band_id, profile_pic " +
                 "FROM bands;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
         List<Band> bands = new ArrayList<>();
         while(results.next()){
             Band band = new Band(results.getString("name"),results.getString("description"),
-                    results.getString("members"), results.getInt("user_id"), results.getInt("band_id"));
+                    results.getString("members"), results.getInt("user_id"), results.getInt("band_id"),
+                    results.getString("profile_pic"));
             bands.add(band);
         }
         return bands;
@@ -35,13 +36,14 @@ public class JdbcBandDao implements BandDao{
 
     @Override
     public Band viewBandPage(int id) {
-        String sql = "SELECT name, description, members, user_id, band_id from bands WHERE band_id = ?;";
+        String sql = "SELECT name, description, members, user_id, band_id, profile_pic from bands WHERE band_id = ?;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
 
         if (results.next()){
             Band band = new Band(results.getString("name"),results.getString("description"),
-                    results.getString("members"), results.getInt("user_id"), results.getInt("band_id"));
+                    results.getString("members"), results.getInt("user_id"), results.getInt("band_id"),
+                    results.getString("profile_pic"));
             return band;
         }
 

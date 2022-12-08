@@ -23,11 +23,12 @@ public class JdbcMessageDao implements MessageDao {
     @Override
     public List<Message> findAllMessages(int user_id) {
         List<Message> messages = new ArrayList<>();
-        String sql = "SELECT m.band_id, m.message_id, m.message_date, m.message_content, name\n" +
+        String sql = "SELECT m.band_id, m.message_id, m.message_date, m.message_content, name, b.profile_pic\n" +
                 "FROM messages AS m\n" +
                 "\tJOIN bands AS b ON m.band_id = b.band_id\n" +
                 "\tJOIN followers AS f ON f.band_id = b.band_id\n" +
-                "WHERE f.user_id = ?;";
+                "WHERE f.user_id = ?\n" +
+                "ORDER BY message_date DESC;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, user_id);
         while (results.next()){
             Message message = mapRowToMessage(results);
@@ -47,7 +48,8 @@ public class JdbcMessageDao implements MessageDao {
                 rowSet.getString("message_content"),
                 rowSet.getInt("band_id"),
                 rowSet.getInt("message_id"),
-                rowSet.getString("name"));
+                rowSet.getString("name"),
+                rowSet.getString("profile_pic"));
 
         return message;
     }
