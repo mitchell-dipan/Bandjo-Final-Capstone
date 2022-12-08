@@ -1,5 +1,11 @@
 import axios from 'axios';
 
+const requestConfig = {
+    headers: {
+        'Content-Type': 'application/json'
+    }
+};
+
 export default {
 
     getAllNotifications() {
@@ -21,7 +27,10 @@ export default {
     },
     getShows(id) {
         return axios.get(`/bands/${id}/shows`)
-    }
+    },
+    createBandPage(band) {
+        return axios.post('/create', band, requestConfig)
+    },
 
     // get(id) {
     //     return http.get(`/messages/${id}`);

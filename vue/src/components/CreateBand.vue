@@ -6,43 +6,66 @@
       name="name"
       type="text"
       placeholder="Band Name"
-      v-model="newBand.name"
+      v-model="band.name"
     />
 
     <input
       type="text"
       class="type"
       placeholder="Description"
-      v-model="newBand.description"
+      v-model="band.description"
     />
     <input
       class="type"
       type="text"
       placeholder="Members"
-      v-model="newBand.members"
+      v-model="band.members"
     />
     <input
       class="type"
       type="text"
       placeholder="Profile pic url"
-      v-model="newBand.profilePic"
+      v-model="band.profilePic"
     />
+    <button @click.prevent="submitForm()">create</button>
   </div>
 </template>
 
 <script>
+import MessageService from "../services/MessageService";
+
 export default {
   data() {
     return {
-      newBand: {
+      band: {
         name: "",
         description: "",
         members: "",
+        userID: 4,
         profilePic: "",
-        userID: "",
       },
-      user: {},
     };
+  },
+  methods: {
+    submitForm() {
+      const newBand = {
+        name: this.band.name,
+        description: this.band.description,
+        members: this.band.members,
+        user_id: 4,
+        profilePic: this.band.profilePic,
+      };
+
+      MessageService.createBandPage(newBand).then((response) => {
+        let newId = response.data;
+        this.$router.push(`/bands/${newId}`);
+      });
+    },
+  },
+  computed: {
+    currentUserId() {
+      return this.$store.state.user.id;
+    },
   },
 };
 </script>

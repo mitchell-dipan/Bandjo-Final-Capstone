@@ -10,6 +10,6 @@ public interface BandDao {
 
     Band viewBandPage(int id);
 
-    void createBand(Band band);
+    Integer createBand(Band band);
 
 }

@@ -69,5 +69,12 @@ public class BandjoController {
         return showDao.getShowsByBandId(id);
     }
 
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping(path = "/create")
+    public Integer createNewBandPage(@RequestBody Band band){
+         return bandDao.createBand(band);
+    }
+//    @PreAuthorize("hasRole('USER')")
+//    @GetMapping(path = "/")
 
 }

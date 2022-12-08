@@ -51,13 +51,13 @@ public class JdbcBandDao implements BandDao{
     }
 
     @Override
-    public void createBand(Band band) {
+    public Integer createBand(Band band) {
         String sql = "INSERT INTO bands(name, description, members, user_id, profile_pic)\n" +
-                "VALUES(?,?,?,?,?)";
+                "VALUES(?,?,?,?,?) RETURNING band_id;";
 
-        Integer newId = jdbcTemplate.queryForObject(sql, Integer.class, band.getName(), band.getDescription(), band.getMembers(), band.getUserID(), band.getProfilePic());
+        Integer newId = jdbcTemplate.queryForObject(sql,Integer.class, band.getName(), band.getDescription(), band.getMembers(), band.getUserID(), band.getProfilePic());
 
-
+        return newId;
     }
 
 
