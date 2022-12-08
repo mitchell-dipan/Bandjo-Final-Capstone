@@ -49,4 +49,16 @@ public class JdbcBandDao implements BandDao{
 
         return null;
     }
+
+    @Override
+    public void createBand(Band band) {
+        String sql = "INSERT INTO bands(name, description, members, user_id, profile_pic)\n" +
+                "VALUES(?,?,?,?,?)";
+
+        Integer newId = jdbcTemplate.queryForObject(sql, Integer.class, band.getName(), band.getDescription(), band.getMembers(), band.getUserID(), band.getProfilePic());
+
+
+    }
+
+
 }
