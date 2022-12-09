@@ -8,7 +8,10 @@
         placeholder="Type any band or artist..."
       />
       <div v-for="band in filteredList" v-bind:key="band.id">
-        <router-link :to="{ name: 'page', params: { id: band.bandID } }">
+        <router-link
+          :to="{ name: 'page', params: { id: band.bandID } }"
+          class="route"
+        >
           <p class="result">
             {{ band.name }}
           </p>
@@ -83,6 +86,9 @@ input {
   font-size: 3em;
   border: solid 1px #ef8354;
   border-radius: 10px;
+  text-decoration: none;
+}
+.route {
   text-decoration: none;
 }
 </style>
