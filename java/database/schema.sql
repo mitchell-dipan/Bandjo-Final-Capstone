@@ -24,7 +24,7 @@ CREATE TABLE bands
 	members varchar(1000) NOT NULL,
 	user_id INTEGER NOT NULL,
 	band_id SERIAL NOT NULL,
-	profile_pic varchar(1000),
+	profile_pic varchar(5000),
 	
 	CONSTRAINT PK_band_id PRIMARY KEY(band_id),
 	CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users(user_id)
@@ -53,7 +53,7 @@ CREATE TABLE messages
 
 CREATE TABLE pictures
 (
-	pic_url varchar(1000) NOT NULL,
+	pic_url varchar(5000) NOT NULL,
 	band_id INTEGER NOT NULL,
 	picture_id SERIAL NOT NULL,
 	
