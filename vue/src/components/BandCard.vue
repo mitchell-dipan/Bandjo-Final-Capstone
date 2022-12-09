@@ -13,11 +13,13 @@
         </div>
       </div>
     </div>
-    <ul v-for="show in shows" v-bind:key="show.id">
-      <li>
-        {{ show.showName }} / {{ show.showLocation }} / {{ show.showDate }}
-      </li>
-    </ul>
+    <div class="upcoming-shows">
+      <ul v-for="show in shows" v-bind:key="show.id">
+        <li>
+          {{ show.showName }} / {{ show.showLocation }} / {{ show.showDate }}
+        </li>
+      </ul>
+    </div>
     <div class="gallery">
       <h2>Gallery</h2>
       <div class="picture-gallery">
@@ -113,6 +115,13 @@ export default {
   border-radius: 10px;
   font-weight: bold;
   color: white;
+}
+.upcoming-shows {
+  display: flex;
+}
+.upcoming-shows ul li {
+  list-style: none;
+  font-size: 1em;
 }
 .gallery {
   display: flex;
