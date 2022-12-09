@@ -36,6 +36,12 @@ export default {
     },
     addShow(id, show) {
         return axios.post(`/create/${id}/show`, show);
+    },
+    getAllGenres() {
+        return axios.get('/genres');
+    },
+    addGenreToBand(id, genre) {
+        return axios.post(`/create/${id}/genre`, genre);
     }
 
     // get(id) {

@@ -89,4 +89,16 @@ public class BandjoController {
         showDao.addShowForBand(show);
     }
 
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping(path = "/create/{id}/genre")
+    public void addGenreToBand(@PathVariable int id, @RequestBody Genre genre){
+        genreDao.addGenreToBand(genre.getGenreName(), id);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping(path = "/genres")
+    public List<Genre> getGenres(){
+        return genreDao.findAllGenres();
+    }
+
 }

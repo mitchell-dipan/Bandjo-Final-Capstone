@@ -28,6 +28,18 @@
         placeholder="Profile pic url"
         v-model="band.profilePic"
       />
+
+      <div id="search">
+        <input
+          type="text"
+          id="genreNameFilter"
+          v-model="searchGenre.genreName"
+          placeholder="Type any genre..."
+        />
+        <div v-for="genre in filteredGenres" v-bind:key="genre.genreId">
+          <p @click="addGenre(genre.genreName)">{{ genre.genreName }}</p>
+        </div>
+      </div>
       <div>
         <input
           class="type"
@@ -92,9 +104,24 @@ export default {
         showDate: "",
         showLocation: "",
       },
+      genre: {
+        genreId: "",
+        genreName: "",
+      },
+      searchGenre: {
+        genreId: "",
+        genreName: "",
+      },
       pictures: [],
       shows: [],
+      genresFromData: [],
+      genres: [],
     };
+  },
+  created() {
+    MessageService.getAllGenres().then((response) => {
+      this.genresFromData = response.data;
+    });
   },
   methods: {
     submitForm() {
@@ -114,6 +141,9 @@ export default {
 
         this.shows.forEach((show) => {
           MessageService.addShow(newId, show).then(() => {});
+        });
+        this.genres.forEach((g) => {
+          MessageService.addGenreToBand(newId, g).then(() => {});
         });
 
         this.$router.push(`/bands/${newId}`);
@@ -137,10 +167,32 @@ export default {
       this.show.showDate = "";
       this.show.showLocation = "";
     },
+    addGenre(g) {
+      const newGenre = {
+        genreName: g,
+        // genreId: this.searchGenre.genreId,
+      };
+      this.genres.push(newGenre);
+      this.searchGenre.genreName = "";
+      // this.searchGenre.genreId = "";
+    },
   },
   computed: {
     currentUserId() {
       return this.$store.state.user.id;
+    },
+    filteredGenres() {
+      let genreList = this.genresFromData;
+      if (this.searchGenre.genreName != "") {
+        genreList = genreList.filter((genre) =>
+          genre.genreName
+            .toLowerCase()
+            .includes(this.searchGenre.genreName.toLowerCase())
+        );
+        return genreList;
+      } else {
+        return [];
+      }
     },
   },
 };

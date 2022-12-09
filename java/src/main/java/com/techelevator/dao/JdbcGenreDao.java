@@ -19,7 +19,14 @@ public class JdbcGenreDao implements GenreDao{
 
     @Override
     public List<Genre> findAllGenres() {
-        return null;
+        String sql = "SELECT genre_id, genre_name FROM genres;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        List<Genre> genres = new ArrayList<>();
+        while(results.next()){
+            Genre genre = new Genre(results.getInt("genre_id"), results.getString("genre_name") );
+            genres.add(genre);
+        }
+        return genres;
     }
 
     @Override
@@ -48,9 +55,9 @@ public class JdbcGenreDao implements GenreDao{
     }
 
     @Override
-    public void addGenreToBand(int genre_id, int band_id) {
-        String sql = "INSERT INTO band_genre(genre_id, band_id) VALUES(?,?);";
-        jdbcTemplate.update(sql, genre_id, band_id);
+    public void addGenreToBand(String genreName, int band_id) {
+        String sql = "INSERT INTO band_genre(genre_id, band_id) VALUES((SELECT genre_id FROM genres WHERE genre_name = ?),?);";
+        jdbcTemplate.update(sql, genreName, band_id);
     }
 
     private Genre mapRowToGenre(SqlRowSet rowSet){
