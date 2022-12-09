@@ -81,13 +81,13 @@ export default {
       const bandId = parseInt(this.$route.params.id);
       const userId = this.$store.state.user.id;
       MessageService.follow(bandId, userId).then(() => {});
-      this.follow = "Unfollow";
+      this.status = true;
     },
     unfollowBand() {
       const bandId = parseInt(this.$route.params.id);
       const userId = this.$store.state.user.id;
       MessageService.unfollow(bandId, userId).then(() => {});
-      this.follow = "Follow";
+      this.status = false;
     },
   },
 };

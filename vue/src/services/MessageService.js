@@ -47,7 +47,7 @@ export default {
         return axios.post(`/follow?bandId=${bandId}&userId=${userId}`);
     },
     unfollow(bandId, userId) {
-        return axios.post(`/unfollow?bandId=${bandId}&userId=${userId}`);
+        return axios.delete(`/unfollow?bandId=${bandId}&userId=${userId}`);
     },
     checkFollowStatus(bandId, userId) {
         return axios.get(`/check?bandId=${bandId}&userId=${userId}`);

@@ -106,8 +106,9 @@ public class BandjoController {
     public void addFollower(@RequestParam int bandId, @RequestParam int userId){
         bandDao.addFollower(bandId, userId);
     }
+    
     @PreAuthorize("hasRole('USER')")
-    @PutMapping(path ="/unfollow")
+    @DeleteMapping(path ="/unfollow")
     public void unfollow(@RequestParam int bandId, @RequestParam int userId) {
         bandDao.deleteFollower(bandId, userId);
     }

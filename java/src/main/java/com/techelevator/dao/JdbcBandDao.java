@@ -67,7 +67,7 @@ public class JdbcBandDao implements BandDao{
 
     @Override
     public void deleteFollower(int band_id, int user_id) {
-        String sql ="DELETE FROM followers WHERE band_id = ? AND user_id = ?";
+        String sql ="DELETE FROM followers WHERE band_id = ? AND user_id = ?;";
         jdbcTemplate.update(sql, band_id, user_id);
     }
 
