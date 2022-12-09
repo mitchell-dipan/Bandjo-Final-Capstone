@@ -7,18 +7,18 @@
         <h1>{{ band.name }}</h1>
         <p id="description">{{ band.description }}</p>
         <p>Members: {{ band.members }}</p>
-        <div id="buttons">
-          <div id="edit-profile" @click="unfollowBand" v-if="status === true">
-            Following
-          </div>
-          <div id="edit-profile" @click="followBand" v-else>Follow</div>
-          <button id="edit-profile">Edit Profile</button>
-        </div>
         <div class="genre-box">
           <ul v-for="genre in genres" v-bind:key="genre.id">
             <li>{{ genre.genreName }}</li>
           </ul>
         </div>
+      </div>
+      <div id="buttons">
+        <div id="edit-profile" @click="unfollowBand" v-if="status === true">
+          Following
+        </div>
+        <div id="edit-profile" @click="followBand" v-else>Follow</div>
+        <button id="edit-profile">Edit Profile</button>
       </div>
     </div>
     <div class="upcoming-shows">
@@ -133,6 +133,7 @@ export default {
 #buttons {
   display: flex;
   justify-content: flex-end;
+  width: 35vw;
 }
 .genre-box {
   display: flex;
