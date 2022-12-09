@@ -1,17 +1,15 @@
 <template>
   <main>
     <div class="timeline-box">
-      <img id="notes-logo" src="../../assets/notes-logo.png" />
-      <div>
-        <!-- <select name="sort" id="sort">
-          <option value="Time" @click="sortByTime">Most Recent</option>
-          <option value="Alphabetically" @click="sortByBand">By Band</option>
-        </select> -->
-        <div v-if="sort">
-          <button @click="sortByBand">Sort By Band</button>
-        </div>
-        <div v-else>
-          <button @click="sortByTime">Sort By Date Received</button>
+      <div id="logo-and-button">
+        <img id="notes-logo" src="../../assets/notes-logo.png" />
+        <div class="sort-by-button">
+          <div v-if="sort">
+            <button @click="sortByBand">Sort By Band</button>
+          </div>
+          <div v-else>
+            <button @click="sortByTime">Sort By Date</button>
+          </div>
         </div>
       </div>
       <div id="message-box" v-for="message in messages" :key="message.id">
@@ -82,6 +80,26 @@ main {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
+#logo-and-button {
+  display: flex;
+  justify-content: space-between;
+}
+#notes-logo {
+  align-self: center;
+  width: 30%;
+}
+.sort-by-button button {
+  padding: 0.75rem 1.25rem;
+  border-radius: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  overflow: hidden;
+  z-index: 1;
+  background-color: #ef8354;
+}
 .timeline-box {
   display: flex;
   flex-direction: column;
@@ -126,11 +144,6 @@ main {
 #message {
   padding-left: 3%;
   color: white;
-}
-
-#notes-logo {
-  align-self: center;
-  width: 20%;
 }
 
 #link {
