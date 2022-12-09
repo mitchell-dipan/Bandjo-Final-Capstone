@@ -93,7 +93,10 @@ export default {
       });
     },
     addPicture() {
-      this.pictures.push(this.picture);
+      const newPic = {
+        pic_url: this.picture.pic_url,
+      };
+      this.pictures.push(newPic);
       this.picture.pic_url = "";
     },
   },
