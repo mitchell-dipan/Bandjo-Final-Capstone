@@ -18,4 +18,6 @@ public interface ShowDao {
     Show getShowById(int showId);
 
     List<Show> getShowsByBandId(int id);
+
+    void addShowForBand(Show show);
 }

@@ -47,6 +47,12 @@ public class JdbcGenreDao implements GenreDao{
         return genres;
     }
 
+    @Override
+    public void addGenreToBand(int genre_id, int band_id) {
+        String sql = "INSERT INTO band_genre(genre_id, band_id) VALUES(?,?);";
+        jdbcTemplate.update(sql, genre_id, band_id);
+    }
+
     private Genre mapRowToGenre(SqlRowSet rowSet){
         Genre genre = new Genre();
         genre.setGenreId(rowSet.getInt("genre_id"));

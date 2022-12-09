@@ -63,4 +63,11 @@ public class JdbcShowDao implements ShowDao{
         }
         return shows;
     }
+
+    @Override
+    public void addShowForBand(Show show) {
+        String sql = "INSERT INTO shows(band_id, show_name, show_date, show_location) VALUES (?,?,?,?);";
+        int id = jdbcTemplate.queryForObject(sql,Integer.class, show.getBandId(), show.getShowName(),
+                show.getShowDate(), show.getShowLocation());
+    }
 }
