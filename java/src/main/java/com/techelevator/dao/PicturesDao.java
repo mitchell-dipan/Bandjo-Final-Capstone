@@ -7,4 +7,6 @@ import java.util.List;
 public interface PicturesDao {
 
     List<Pictures> getPicturesByBandId(int id);
+
+    void createPicture(Pictures picture);
 }

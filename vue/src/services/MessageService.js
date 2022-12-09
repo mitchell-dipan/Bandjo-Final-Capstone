@@ -31,6 +31,9 @@ export default {
     createBandPage(band) {
         return axios.post('/create', band, requestConfig)
     },
+    addPicture(picture) {
+        return axios.post('/create/picture', picture);
+    }
 
     // get(id) {
     //     return http.get(`/messages/${id}`);

@@ -33,4 +33,10 @@ public class JdbcPicturesDao implements PicturesDao {
 
         return pictures;
     }
+
+    @Override
+    public void createPicture(Pictures picture) {
+        String sql = "INSERT INTO pictures(band_id, pic_url) VALUES(?,?) RETURNING picture_id;";
+        int id = jdbcTemplate.queryForObject(sql, Integer.class,picture.getBand_id(), picture.getPic_url());
+    }
 }

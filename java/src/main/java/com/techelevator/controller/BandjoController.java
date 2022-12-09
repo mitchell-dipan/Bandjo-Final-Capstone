@@ -74,7 +74,11 @@ public class BandjoController {
     public Integer createNewBandPage(@RequestBody Band band){
          return bandDao.createBand(band);
     }
-//    @PreAuthorize("hasRole('USER')")
-//    @GetMapping(path = "/")
+
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping(path = "/create/picture")
+    public void createNewPicture(@RequestBody Pictures picture){
+        picturesDao.createPicture(picture);
+    }
 
 }
