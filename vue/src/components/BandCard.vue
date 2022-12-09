@@ -7,19 +7,18 @@
         <h1>{{ band.name }}</h1>
         <p id="description">{{ band.description }}</p>
         <p>Members: {{ band.members }}</p>
-
+        <div id="buttons">
+          <div id="edit-profile" @click="unfollowBand" v-if="status === true">
+            Following
+          </div>
+          <div id="edit-profile" @click="followBand" v-else>Follow</div>
+          <button id="edit-profile">Edit Profile</button>
+        </div>
         <div class="genre-box">
           <ul v-for="genre in genres" v-bind:key="genre.id">
             <li>{{ genre.genreName }}</li>
           </ul>
         </div>
-      </div>
-      <div id="edit-profile" @click="unfollowBand" v-if="status === true">
-        Following
-      </div>
-      <div id="edit-profile" @click="followBand" v-else>Follow</div>
-      <div>
-        <button id="edit-profile">Edit Profile</button>
       </div>
     </div>
     <div class="upcoming-shows">
@@ -112,12 +111,11 @@ export default {
   margin-left: 3%;
 }
 .profile img {
-  border: solid black 2px;
-  border-radius: 100%;
   object-fit: cover;
   width: 20%;
   align-self: flex-start;
   margin-top: 2%;
+  border-radius: 50%;
 }
 .profile h1 {
   font-size: 3em;
@@ -131,6 +129,10 @@ export default {
 }
 #description {
   font-style: italic;
+}
+#buttons {
+  display: flex;
+  justify-content: flex-end;
 }
 .genre-box {
   display: flex;
@@ -158,6 +160,7 @@ export default {
   overflow: hidden;
   z-index: 1;
   background-color: #ef8354;
+  margin-left: 2%;
 }
 .upcoming-shows {
   display: flex;
