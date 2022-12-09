@@ -2,6 +2,12 @@
   <main>
     <div class="timeline-box">
       <img id="notes-logo" src="../../assets/notes-logo.png" />
+      <div>
+        <select name="sort" id="sort">
+          <option value="Alphabetically" @click="sortByBand">By Band</option>
+          <option value="Time" @click="sortByTime">Most Recent</option>
+        </select>
+      </div>
       <div id="message-box" v-for="message in messages" :key="message.id">
         <router-link
           id="link"
@@ -26,20 +32,32 @@ export default {
   data() {
     return {
       messages: [],
-      // errorMsg: "",
+      time: "time",
+      band: "band",
     };
   },
   created() {
-    MessageService.getAllNotifications().then((response) => {
+    MessageService.getAllNotifications(this.time).then((response) => {
       this.messages = response.data;
     });
-    // .catch((err) => {
-    //   if (err.response === 201 || err.response === 200) {
-    //     this.errorMsg = "";
-    //   } else {
-    //     this.errorMsg = err.response;
-    //   }
-    // });
+  },
+  methods: {
+    sortByTime() {
+      MessageService.getAllNotifications(this.time).then((response) => {
+        this.messages = response.data;
+      });
+    },
+    sortByBand() {
+      MessageService.getAllNotifications(this.band).then((response) => {
+        this.messages = response.data;
+      });
+    },
+  },
+  computed: {
+    displayMessages() {
+      let list = this.messages;
+      return list;
+    },
   },
 };
 </script>

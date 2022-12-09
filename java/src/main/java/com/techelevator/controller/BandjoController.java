@@ -33,10 +33,10 @@ public class BandjoController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping(path = "/messages")
-    public List<Message> getMessages(Principal principal){
+    public List<Message> getMessages(Principal principal, @RequestParam String sortBy){
 
         User user = userDao.findByUsername(principal.getName());
-        return messageDao.findAllMessages(user.getId());
+        return messageDao.findAllMessages(user.getId(), sortBy);
     }
 
     @PreAuthorize("hasRole('USER')")

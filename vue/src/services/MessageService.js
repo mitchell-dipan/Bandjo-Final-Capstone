@@ -8,8 +8,8 @@ const requestConfig = {
 
 export default {
 
-    getAllNotifications() {
-        return axios.get('/messages');
+    getAllNotifications(time) {
+        return axios.get(`/messages?sortBy=${time}`);
     },
 
     getAllBands() {
