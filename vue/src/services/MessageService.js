@@ -33,6 +33,9 @@ export default {
     },
     addPicture(id, picture) {
         return axios.post(`/create/${id}/picture`, picture);
+    },
+    addShow(id, show) {
+        return axios.post(`/create/${id}/show`, show);
     }
 
     // get(id) {
