@@ -76,9 +76,10 @@ public class BandjoController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @PostMapping(path = "/create/picture")
-    public void createNewPicture(@RequestBody Pictures picture){
-        picturesDao.createPicture(picture);
+    @PostMapping(path = "/create/{id}/picture")
+    public void createNewPicture(@PathVariable int id, @RequestBody Pictures pictures){
+            pictures.setBand_id(id);
+            picturesDao.createPicture(pictures);
     }
 
 }

@@ -28,12 +28,17 @@
         placeholder="Profile pic url"
         v-model="band.profilePic"
       />
-      <input
-        class="type"
-        type="text"
-        placeholder="Band Pictures"
-        v-model="picture.pic_url"
-      />
+      <div>
+        <input
+          class="type"
+          type="text"
+          placeholder="Band Pictures"
+          v-model="picture.pic_url"
+        />
+        <div id="but">
+          <button @click="addPicture()">Add Picture</button>
+        </div>
+      </div>
     </div>
     <div id="but">
       <button @click.prevent="submitForm()">create</button>
@@ -58,6 +63,7 @@ export default {
         band_id: "",
         pic_url: "",
       },
+      pictures: [],
     };
   },
   methods: {
@@ -71,14 +77,24 @@ export default {
       };
       MessageService.createBandPage(newBand).then((response) => {
         let newId = response.data;
-        const newPic = {
-          band_id: newId,
-          pic_url: this.picture.pic_url,
-        };
-        MessageService.addPicture(newPic).then(() => {
-          this.$router.push(`/bands/${newId}`);
+
+        this.pictures.forEach((picture) => {
+          MessageService.addPicture(newId, picture).then(() => {});
         });
+        this.$router.push(`/bands/${newId}`);
+
+        // const newPic = {
+        //   band_id: newId,
+        //   pic_url: this.picture.pic_url,
+        // };
+        // MessageService.addPicture(newPic).then(() => {
+        //   this.$router.push(`/bands/${newId}`);
+        // });
       });
+    },
+    addPicture() {
+      this.pictures.push(this.picture);
+      this.picture.pic_url = "";
     },
   },
   computed: {

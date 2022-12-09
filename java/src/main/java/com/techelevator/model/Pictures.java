@@ -12,6 +12,10 @@ public class Pictures {
         this.picture_id = picture_id;
     }
 
+    public void setBand_id(int id){
+        this.band_id = id;
+    }
+
     public String getPic_url() {
         return pic_url;
     }
