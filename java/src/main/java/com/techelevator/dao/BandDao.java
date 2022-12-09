@@ -12,4 +12,9 @@ public interface BandDao {
 
     Integer createBand(Band band);
 
+    void addFollower(int band_id, int user_id);
+
+    void deleteFollower(int band_id, int user_id);
+
+    boolean isFollowing(int band_id, int user_id);
 }

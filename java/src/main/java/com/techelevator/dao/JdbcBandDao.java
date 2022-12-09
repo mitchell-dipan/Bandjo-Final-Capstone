@@ -2,7 +2,6 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Band;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.SqlInOutParameter;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
@@ -60,5 +59,27 @@ public class JdbcBandDao implements BandDao{
         return newId;
     }
 
+    @Override
+    public void addFollower(int band_id, int user_id) {
+        String sql = "INSERT INTO followers(band_id, user_id) VALUES(?,?);";
+        jdbcTemplate.update(sql, band_id, user_id);
+    }
+
+    @Override
+    public void deleteFollower(int band_id, int user_id) {
+        String sql ="DELETE FROM followers WHERE band_id = ? AND user_id = ?";
+        jdbcTemplate.update(sql, band_id, user_id);
+    }
+
+    @Override
+    public boolean isFollowing(int band_id, int user_id) {
+        String sql = "SELECT user_id FROM followers WHERE band_id = ? AND user_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql,band_id,user_id);
+        if(results.next()){
+            return true;
+        } else{
+            return false;
+        }
+    }
 
 }

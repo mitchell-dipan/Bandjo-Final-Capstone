@@ -14,6 +14,10 @@
           </ul>
         </div>
       </div>
+      <div id="edit-profile" @click="unfollowBand" v-if="status === true">
+        Following
+      </div>
+      <div id="edit-profile" @click="followBand" v-else>Follow</div>
       <div>
         <button id="edit-profile">Edit Profile</button>
       </div>
@@ -49,10 +53,13 @@ export default {
       pictures: [],
       shows: [],
       genres: [],
+      status: "",
+      follow: "Follow",
     };
   },
   created() {
     const bandId = parseInt(this.$route.params.id);
+    const userId = this.$store.state.user.id;
     MessageService.getBandPage(bandId).then((r) => {
       this.band = r.data;
     });
@@ -65,6 +72,23 @@ export default {
     MessageService.getGenres(bandId).then((r) => {
       this.genres = r.data;
     });
+    MessageService.checkFollowStatus(bandId, userId).then((r) => {
+      this.status = r.data;
+    });
+  },
+  methods: {
+    followBand() {
+      const bandId = parseInt(this.$route.params.id);
+      const userId = this.$store.state.user.id;
+      MessageService.follow(bandId, userId).then(() => {});
+      this.follow = "Unfollow";
+    },
+    unfollowBand() {
+      const bandId = parseInt(this.$route.params.id);
+      const userId = this.$store.state.user.id;
+      MessageService.unfollow(bandId, userId).then(() => {});
+      this.follow = "Follow";
+    },
   },
 };
 </script>

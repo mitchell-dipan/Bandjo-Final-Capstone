@@ -44,7 +44,7 @@ export default {
     };
   },
   created() {
-    MessageService.getAllNotifications(this.band).then((response) => {
+    MessageService.getAllNotifications(this.time).then((response) => {
       this.messages = response.data;
     });
   },

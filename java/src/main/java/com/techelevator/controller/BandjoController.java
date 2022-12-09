@@ -101,4 +101,21 @@ public class BandjoController {
         return genreDao.findAllGenres();
     }
 
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping(path = "/follow")
+    public void addFollower(@RequestParam int bandId, @RequestParam int userId){
+        bandDao.addFollower(bandId, userId);
+    }
+    @PreAuthorize("hasRole('USER')")
+    @PutMapping(path ="/unfollow")
+    public void unfollow(@RequestParam int bandId, @RequestParam int userId) {
+        bandDao.deleteFollower(bandId, userId);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping(path ="/check")
+    public boolean checkIfFollow(@RequestParam int bandId, @RequestParam int userId) {
+        return bandDao.isFollowing(bandId, userId);
+    }
+
 }
