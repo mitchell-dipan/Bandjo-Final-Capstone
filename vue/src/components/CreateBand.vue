@@ -1,80 +1,88 @@
 <template>
   <div class="main">
-    <h1 id="title">Create a Band</h1>
-    <div class="band-info">
+    <div>
+      <h1 id="title">Create a Band</h1>
       <input
+        class="type"
         name="name"
         type="text"
         placeholder="Band Name"
         v-model="band.name"
       />
-    </div>
-    <input
-      type="text"
-      class="type"
-      placeholder="Description"
-      v-model="band.description"
-    />
-    <input
-      class="type"
-      type="text"
-      placeholder="Members"
-      v-model="band.members"
-    />
-    <input
-      class="type"
-      type="text"
-      placeholder="Profile pic url"
-      v-model="band.profilePic"
-    />
-    <div class="genre-search">
       <input
         type="text"
-        id="genreNameFilter"
-        v-model="searchGenre.genreName"
-        placeholder="Type any genre..."
+        class="type"
+        placeholder="Description"
+        v-model="band.description"
       />
-      <div v-for="genre in filteredGenres" v-bind:key="genre.genreId">
-        <p @click="addGenre(genre.genreName)">{{ genre.genreName }}</p>
+      <input
+        class="type"
+        type="text"
+        placeholder="Members"
+        v-model="band.members"
+      />
+      <input
+        class="type"
+        type="text"
+        placeholder="Profile pic url"
+        v-model="band.profilePic"
+      />
+      <div id="search">
+        <input
+          class="type"
+          type="text"
+          id="genreNameFilter"
+          v-model="searchGenre.genreName"
+          placeholder="Type any genre..."
+        />
+        <div id="results-box">
+          <div
+            v-for="genre in filteredGenres"
+            v-bind:key="genre.genreId"
+            class="results"
+          >
+            <p @click="addGenre(genre.genreName)">{{ genre.genreName }}</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h1>Add Show's</h1>
+        <input
+          class="type"
+          type="text"
+          placeholder="Name of Show"
+          v-model="show.showName"
+        />
+        <input
+          class="type"
+          type="date"
+          placeholder="Show date"
+          v-model="show.showDate"
+        />
+        <input
+          class="type"
+          type="text"
+          placeholder="Show Location"
+          v-model="show.showLocation"
+        />
+        <button class="button" @click="addShow()">Add Show</button>
+      </div>
+      <div>
+        <h1>Add Pictures to Your Gallery</h1>
+        <input
+          class="type"
+          type="text"
+          placeholder="Band Pictures"
+          v-model="picture.pic_url"
+        />
+        <button class="button" @click="addPicture()">Add Picture</button>
       </div>
     </div>
-    <div class="add-show-box">
-      <input
-        class="type"
-        type="text"
-        placeholder="Name of Show"
-        v-model="show.showName"
-      />
-      <input
-        class="type"
-        type="date"
-        placeholder="Show date"
-        v-model="show.showDate"
-      />
-      <input
-        class="type"
-        type="text"
-        placeholder="Show Location"
-        v-model="show.showLocation"
-      />
-      <button @click="addShow()">Add Show</button>
-    </div>
-    <div class=".add-pictures">
-      <input
-        class="type"
-        type="text"
-        placeholder="Band Pictures"
-        v-model="picture.pic_url"
-      />
-      <button @click="addPicture()">Add Picture</button>
-    </div>
-    <button @click.prevent="submitForm()">create</button>
+    <button class="button" @click.prevent="submitForm()">create</button>
   </div>
 </template>
-
 <script>
 import MessageService from "../services/MessageService";
-
 export default {
   data() {
     return {
@@ -125,18 +133,15 @@ export default {
       };
       MessageService.createBandPage(newBand).then((response) => {
         let newId = response.data;
-
         this.pictures.forEach((picture) => {
           MessageService.addPicture(newId, picture).then(() => {});
         });
-
         this.shows.forEach((show) => {
           MessageService.addShow(newId, show).then(() => {});
         });
         this.genres.forEach((g) => {
           MessageService.addGenreToBand(newId, g).then(() => {});
         });
-
         this.$router.push(`/bands/${newId}`);
       });
     },
@@ -188,43 +193,62 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .main {
   display: flex;
-  align-items: center;
+  position: relative;
   flex-direction: column;
-  height: 90vh;
+  align-items: center;
+  margin-left: 10%;
+  width: 70%;
+  border-left: #2d3142 solid 2px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
-h1 {
-  font-weight: lighter;
-  font-size: 4em;
-  margin-bottom: 2%;
+.type {
+  width: 80%;
+  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px white;
+  border-radius: 16px;
+  text-align: center;
+  padding: 5%;
+  margin-top: 3%;
+  background-color: white;
 }
-.main input {
-  width: 50%;
-  padding: 2%;
+.type::placeholder {
   font-size: 2em;
-  border-radius: 20px;
-  border: 1px white solid;
-  margin-bottom: 2%;
+  text-align: center;
 }
-.genre-search {
+#results-box {
   display: flex;
-  flex-direction: column;
-  align-self: flex-end;
-  width: 50vw;
+  align-items: center;
 }
-.genre-search p {
-  padding-right: 2vw;
-  padding-left: 2vw;
+.results p {
+  margin-top: 5%;
+  margin-left: 2%;
+  padding-right: 1vw;
+  padding-left: 1vw;
   padding-top: 1vh;
   padding-bottom: 1vh;
   background-color: #ef8354;
   border-radius: 10px;
   font-weight: bold;
   color: white;
+}
+h1 {
+  font-weight: lighter;
+  font-size: 3em;
+}
+.button {
+  padding: 0.75rem 1.25rem;
+  border-radius: 10rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  overflow: hidden;
+  z-index: 1;
+  background-color: #ef8354;
+  margin-top: 2%;
 }
 </style>
