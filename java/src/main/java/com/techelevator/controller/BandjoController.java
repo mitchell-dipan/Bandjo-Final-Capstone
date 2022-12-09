@@ -82,4 +82,11 @@ public class BandjoController {
             picturesDao.createPicture(pictures);
     }
 
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping(path = "/create/{id}/show")
+    public void createNewShow(@PathVariable int id, @RequestBody Show show){
+        show.setBandId(id);
+        showDao.addShowForBand(show);
+    }
+
 }

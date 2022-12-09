@@ -32,6 +32,29 @@
         <input
           class="type"
           type="text"
+          placeholder="Name of Show"
+          v-model="show.showName"
+        />
+        <input
+          class="type"
+          type="date"
+          placeholder="Show date"
+          v-model="show.showDate"
+        />
+        <input
+          class="type"
+          type="text"
+          placeholder="Show Location"
+          v-model="show.showLocation"
+        />
+        <div id="but">
+          <button @click="addShow()">Add Show</button>
+        </div>
+      </div>
+      <div>
+        <input
+          class="type"
+          type="text"
           placeholder="Band Pictures"
           v-model="picture.pic_url"
         />
@@ -63,7 +86,14 @@ export default {
         band_id: "",
         pic_url: "",
       },
+      show: {
+        bandId: "",
+        showName: "",
+        showDate: "",
+        showLocation: "",
+      },
       pictures: [],
+      shows: [],
     };
   },
   methods: {
@@ -81,15 +111,12 @@ export default {
         this.pictures.forEach((picture) => {
           MessageService.addPicture(newId, picture).then(() => {});
         });
-        this.$router.push(`/bands/${newId}`);
 
-        // const newPic = {
-        //   band_id: newId,
-        //   pic_url: this.picture.pic_url,
-        // };
-        // MessageService.addPicture(newPic).then(() => {
-        //   this.$router.push(`/bands/${newId}`);
-        // });
+        this.shows.forEach((show) => {
+          MessageService.addShow(newId, show).then(() => {});
+        });
+
+        this.$router.push(`/bands/${newId}`);
       });
     },
     addPicture() {
@@ -98,6 +125,17 @@ export default {
       };
       this.pictures.push(newPic);
       this.picture.pic_url = "";
+    },
+    addShow() {
+      const newShow = {
+        showName: this.show.showName,
+        showDate: this.show.showDate,
+        showLocation: this.show.showLocation,
+      };
+      this.shows.push(newShow);
+      this.show.showName = "";
+      this.show.showDate = "";
+      this.show.showLocation = "";
     },
   },
   computed: {
