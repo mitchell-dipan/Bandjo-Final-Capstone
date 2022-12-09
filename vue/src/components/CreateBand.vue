@@ -1,83 +1,74 @@
 <template>
-  <div>
+  <div class="main">
     <h1 id="title">Create a Band</h1>
-    <div>
+    <div class="band-info">
       <input
-        class="type"
         name="name"
         type="text"
         placeholder="Band Name"
         v-model="band.name"
       />
-
+    </div>
+    <input
+      type="text"
+      class="type"
+      placeholder="Description"
+      v-model="band.description"
+    />
+    <input
+      class="type"
+      type="text"
+      placeholder="Members"
+      v-model="band.members"
+    />
+    <input
+      class="type"
+      type="text"
+      placeholder="Profile pic url"
+      v-model="band.profilePic"
+    />
+    <div class="genre-search">
       <input
         type="text"
-        class="type"
-        placeholder="Description"
-        v-model="band.description"
+        id="genreNameFilter"
+        v-model="searchGenre.genreName"
+        placeholder="Type any genre..."
       />
-      <input
-        class="type"
-        type="text"
-        placeholder="Members"
-        v-model="band.members"
-      />
-      <input
-        class="type"
-        type="text"
-        placeholder="Profile pic url"
-        v-model="band.profilePic"
-      />
-
-      <div id="search">
-        <input
-          type="text"
-          id="genreNameFilter"
-          v-model="searchGenre.genreName"
-          placeholder="Type any genre..."
-        />
-        <div v-for="genre in filteredGenres" v-bind:key="genre.genreId">
-          <p @click="addGenre(genre.genreName)">{{ genre.genreName }}</p>
-        </div>
-      </div>
-      <div>
-        <input
-          class="type"
-          type="text"
-          placeholder="Name of Show"
-          v-model="show.showName"
-        />
-        <input
-          class="type"
-          type="date"
-          placeholder="Show date"
-          v-model="show.showDate"
-        />
-        <input
-          class="type"
-          type="text"
-          placeholder="Show Location"
-          v-model="show.showLocation"
-        />
-        <div id="but">
-          <button @click="addShow()">Add Show</button>
-        </div>
-      </div>
-      <div>
-        <input
-          class="type"
-          type="text"
-          placeholder="Band Pictures"
-          v-model="picture.pic_url"
-        />
-        <div id="but">
-          <button @click="addPicture()">Add Picture</button>
-        </div>
+      <div v-for="genre in filteredGenres" v-bind:key="genre.genreId">
+        <p @click="addGenre(genre.genreName)">{{ genre.genreName }}</p>
       </div>
     </div>
-    <div id="but">
-      <button @click.prevent="submitForm()">create</button>
+    <div class="add-show-box">
+      <input
+        class="type"
+        type="text"
+        placeholder="Name of Show"
+        v-model="show.showName"
+      />
+      <input
+        class="type"
+        type="date"
+        placeholder="Show date"
+        v-model="show.showDate"
+      />
+      <input
+        class="type"
+        type="text"
+        placeholder="Show Location"
+        v-model="show.showLocation"
+      />
+      <button @click="addShow()">Add Show</button>
     </div>
+    <div class=".add-pictures">
+      <input
+        class="type"
+        type="text"
+        placeholder="Band Pictures"
+        v-model="picture.pic_url"
+      />
+      <button @click="addPicture()">Add Picture</button>
+    </div>
+    <button @click.prevent="submitForm()">create</button>
   </div>
 </template>
 
@@ -198,22 +189,42 @@ export default {
 };
 </script>
 
-<style>
-.type {
+<style scoped>
+.main {
   display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 90vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+h1 {
+  font-weight: lighter;
+  font-size: 4em;
+  margin-bottom: 2%;
+}
+.main input {
   width: 50%;
-  margin-left: 35%;
+  padding: 2%;
+  font-size: 2em;
+  border-radius: 20px;
+  border: 1px white solid;
+  margin-bottom: 2%;
 }
-#title {
+.genre-search {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: auto;
+  flex-direction: column;
+  align-self: flex-end;
+  width: 50vw;
 }
-#but {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px 30px;
+.genre-search p {
+  padding-right: 2vw;
+  padding-left: 2vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  background-color: #ef8354;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
 }
 </style>
