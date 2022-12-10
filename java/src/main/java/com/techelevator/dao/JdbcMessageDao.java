@@ -6,8 +6,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -49,6 +52,13 @@ public class JdbcMessageDao implements MessageDao {
             }
         }
         return messages;
+    }
+
+    @Override
+    public void sendMessage(String message, int bandId) {
+        LocalDate date = LocalDate.now();
+        String sql = "INSERT INTO messages (message_date, message_content, band_id) VALUES (?, ?, ?)";
+        jdbcTemplate.update(sql, date, message, bandId);
     }
 
     private Message mapRowToMessage(SqlRowSet rowSet){

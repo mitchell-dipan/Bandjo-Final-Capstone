@@ -19,6 +19,20 @@
         </div>
         <div id="edit-profile" @click="followBand" v-else>Follow</div>
         <button id="edit-profile">Edit Profile</button>
+        <button
+          id="edit-profile"
+          v-if="band.userID == this.$store.state.user.id"
+          @click="isReadyForMessage = !isReadyForMessage"
+        >
+          Message Followers
+        </button>
+        <input
+          type="text"
+          placeholder="Type Message Here"
+          v-show="isReadyForMessage"
+          v-model="messageText"
+        />
+        <button v-show="isReadyForMessage" @click="sendMessage">Send</button>
       </div>
     </div>
     <div class="upcoming-shows">
@@ -54,11 +68,12 @@ export default {
       genres: [],
       status: "",
       follow: "Follow",
+      isReadyForMessage: false,
+      messageText: "",
     };
   },
   created() {
     const bandId = parseInt(this.$route.params.id);
-    const userId = this.$store.state.user.id;
     MessageService.getBandPage(bandId).then((r) => {
       this.band = r.data;
     });
@@ -71,22 +86,27 @@ export default {
     MessageService.getGenres(bandId).then((r) => {
       this.genres = r.data;
     });
-    MessageService.checkFollowStatus(bandId, userId).then((r) => {
+    MessageService.checkFollowStatus(bandId).then((r) => {
       this.status = r.data;
     });
   },
   methods: {
     followBand() {
       const bandId = parseInt(this.$route.params.id);
-      const userId = this.$store.state.user.id;
-      MessageService.follow(bandId, userId).then(() => {});
+      MessageService.follow(bandId).then(() => {});
       this.status = true;
     },
     unfollowBand() {
       const bandId = parseInt(this.$route.params.id);
-      const userId = this.$store.state.user.id;
-      MessageService.unfollow(bandId, userId).then(() => {});
+      MessageService.unfollow(bandId).then(() => {});
       this.status = false;
+    },
+    sendMessage() {
+      const bandId = parseInt(this.$route.params.id);
+      const mes = this.messageText;
+      MessageService.sendMessage(bandId, mes).then(() => {});
+      this.messageText = "";
+      this.isReadyForMessage = false;
     },
   },
 };

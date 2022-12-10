@@ -43,14 +43,17 @@ export default {
     addGenreToBand(id, genre) {
         return axios.post(`/create/${id}/genre`, genre);
     },
-    follow(bandId, userId) {
-        return axios.post(`/follow?bandId=${bandId}&userId=${userId}`);
+    follow(bandId) {
+        return axios.post(`/follow?bandId=${bandId}`);
     },
-    unfollow(bandId, userId) {
-        return axios.delete(`/unfollow?bandId=${bandId}&userId=${userId}`);
+    unfollow(bandId) {
+        return axios.delete(`/unfollow?bandId=${bandId}`);
     },
-    checkFollowStatus(bandId, userId) {
-        return axios.get(`/check?bandId=${bandId}&userId=${userId}`);
+    checkFollowStatus(bandId) {
+        return axios.get(`/check?bandId=${bandId}`);
+    },
+    sendMessage(bandId, message) {
+        return axios.post(`/bands/${bandId}/sendMessage?messages=${message}`);
     }
 
     // get(id) {

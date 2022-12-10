@@ -103,20 +103,29 @@ public class BandjoController {
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping(path = "/follow")
-    public void addFollower(@RequestParam int bandId, @RequestParam int userId){
-        bandDao.addFollower(bandId, userId);
+    public void addFollower(@RequestParam int bandId, Principal principal){
+        User user = userDao.findByUsername(principal.getName());
+        bandDao.addFollower(bandId, user.getId());
     }
     
     @PreAuthorize("hasRole('USER')")
     @DeleteMapping(path ="/unfollow")
-    public void unfollow(@RequestParam int bandId, @RequestParam int userId) {
-        bandDao.deleteFollower(bandId, userId);
+    public void unfollow(@RequestParam int bandId, Principal principal) {
+        User user = userDao.findByUsername(principal.getName());
+        bandDao.deleteFollower(bandId, user.getId());
     }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping(path ="/check")
-    public boolean checkIfFollow(@RequestParam int bandId, @RequestParam int userId) {
-        return bandDao.isFollowing(bandId, userId);
+    public boolean checkIfFollow(@RequestParam int bandId, Principal principal) {
+        User user = userDao.findByUsername(principal.getName());
+        return bandDao.isFollowing(bandId, user.getId());
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping(path = "/bands/{bandId}/sendMessage")
+    public void sendMessage(@PathVariable int bandId, @RequestParam String messages){
+        messageDao.sendMessage(messages, bandId);
     }
 
 }
