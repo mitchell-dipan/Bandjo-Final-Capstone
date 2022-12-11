@@ -18,7 +18,12 @@
           Following
         </div>
         <div id="edit-profile" @click="followBand" v-else>Follow</div>
-        <button id="edit-profile">Edit Profile</button>
+        <button
+          id="edit-profile"
+          v-if="band.userID == this.$store.state.user.id"
+        >
+          Edit Profile
+        </button>
         <button
           id="edit-profile"
           v-if="band.userID == this.$store.state.user.id"
