@@ -135,14 +135,14 @@ public class BandjoController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @DeleteMapping(path = "/bands/{id}/deletegenres")
-    public void deleteGenres(@PathVariable int id, @RequestBody Genre[] genres){
-        genreDao.deleteGenreFromBand(id,genres);
+    @DeleteMapping(path = "/bands/{id}/deleteGenre")
+    public void deleteGenres(@PathVariable int id, @RequestParam int genreId){
+        genreDao.deleteGenreFromBand(id,genreId);
     }
 
     @PreAuthorize("hasRole('USER')")
     @DeleteMapping(path = "/bands/{id}/deletepictures")
-    public void deleteGenres(@PathVariable int id, @RequestBody Pictures[] pictures){
+    public void deletePictures(@PathVariable int id, @RequestBody Pictures[] pictures){
         picturesDao.deletePicturesFromBand(id,pictures);
     }
 

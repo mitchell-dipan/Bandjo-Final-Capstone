@@ -57,8 +57,10 @@ export default {
     },
     updateBand(id, band) {
         return axios.put(`/bands/${id}/editProfile`, band);
+    },
+    deleteGenreFromBand(id, genreId) {
+        return axios.delete(`/bands/${id}/deleteGenre?genreId=${genreId}`);
     }
-
 
     // get(id) {
     //     return http.get(`/messages/${id}`);

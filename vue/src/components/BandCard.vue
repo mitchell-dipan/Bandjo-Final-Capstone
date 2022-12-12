@@ -6,7 +6,7 @@
       <div class="title-members">
         <h1>{{ band.name }}</h1>
         <p id="description">{{ band.description }}</p>
-        <p>Members: {{ band.members }}</p>
+        <p>{{ band.members }}</p>
         <div class="genre-box">
           <ul v-for="genre in genres" v-bind:key="genre.id">
             <li>{{ genre.genreName }}</li>
