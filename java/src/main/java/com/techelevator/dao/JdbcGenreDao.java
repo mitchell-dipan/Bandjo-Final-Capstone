@@ -60,6 +60,14 @@ public class JdbcGenreDao implements GenreDao{
         jdbcTemplate.update(sql, genreName, band_id);
     }
 
+    @Override
+    public void deleteGenreFromBand(int id, Genre[] genres) {
+        String sql = "DELETE FROM band_genre WHERE band_id = ? AND genre_id = (SELECT genre_id FROM genres WHERE genre_name = ?);";
+        for(Genre genre : genres){
+            jdbcTemplate.update(sql,id,genre.getGenreName());
+        }
+    }
+
     private Genre mapRowToGenre(SqlRowSet rowSet){
         Genre genre = new Genre();
         genre.setGenreId(rowSet.getInt("genre_id"));

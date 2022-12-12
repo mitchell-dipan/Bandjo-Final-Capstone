@@ -128,4 +128,22 @@ public class BandjoController {
         messageDao.sendMessage(messages, bandId);
     }
 
+    @PreAuthorize("hasRole('USER')")
+    @PutMapping(path = "/bands/{id}/updateband")
+    public void updateBands(@PathVariable int id, @RequestBody Band band){
+        bandDao.updateBand(band);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @DeleteMapping(path = "/bands/{id}/deletegenres")
+    public void deleteGenres(@PathVariable int id, @RequestBody Genre[] genres){
+        genreDao.deleteGenreFromBand(id,genres);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @DeleteMapping(path = "/bands/{id}/deletepictures")
+    public void deleteGenres(@PathVariable int id, @RequestBody Pictures[] pictures){
+        picturesDao.deletePicturesFromBand(id,pictures);
+    }
+
 }

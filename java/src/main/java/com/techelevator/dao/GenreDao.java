@@ -16,4 +16,6 @@ public interface GenreDao {
 
     void addGenreToBand(String genreName, int band_id);
 
+    void deleteGenreFromBand(int id, Genre[] genres);
+
 }

@@ -82,4 +82,12 @@ public class JdbcBandDao implements BandDao{
         }
     }
 
+    @Override
+    public void updateBand(Band band) {
+        String sql = "UPDATE bands\n" +
+                "SET name = ?, description = ?, members = ?, profile_pic = ?\n" +
+                "WHERE band_id = ?;";
+        jdbcTemplate.update(sql, band.getName(), band.getDescription(), band.getMembers(), band.getProfilePic(), band.getBandID());
+    }
+
 }

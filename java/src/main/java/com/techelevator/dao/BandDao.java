@@ -17,4 +17,6 @@ public interface BandDao {
     void deleteFollower(int band_id, int user_id);
 
     boolean isFollowing(int band_id, int user_id);
+
+    void updateBand(Band band);
 }

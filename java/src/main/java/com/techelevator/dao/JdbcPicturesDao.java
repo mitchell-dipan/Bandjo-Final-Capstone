@@ -39,4 +39,12 @@ public class JdbcPicturesDao implements PicturesDao {
         String sql = "INSERT INTO pictures(band_id, pic_url) VALUES(?,?) RETURNING picture_id;";
         int id = jdbcTemplate.queryForObject(sql, Integer.class,picture.getBand_id(), picture.getPic_url());
     }
+
+    @Override
+    public void deletePicturesFromBand(int id, Pictures[] pictures) {
+        String sql = "DELETE FROM pictures WHERE band_id = ? AND picture_id = ?;";
+        for (Pictures picture : pictures){
+            jdbcTemplate.update(sql,id,picture.getPicture_id());
+        }
+    }
 }
