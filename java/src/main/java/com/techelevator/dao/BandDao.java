@@ -18,5 +18,5 @@ public interface BandDao {
 
     boolean isFollowing(int band_id, int user_id);
 
-    void updateBand(Band band);
+    void updateBand(int id, Band band);
 }

@@ -18,12 +18,19 @@
           Following
         </div>
         <div class="button-style" @click="followBand" v-else>Follow</div>
-        <button
-          class="button-style"
-          v-if="band.userID == this.$store.state.user.id"
+        <router-link
+          :to="{
+            name: 'bands-edit-profile',
+            params: { id: this.$route.params.id },
+          }"
         >
-          Edit Profile
-        </button>
+          <button
+            class="button-style"
+            v-if="band.userID == this.$store.state.user.id"
+          >
+            Edit Profile
+          </button>
+        </router-link>
       </div>
     </div>
     <div id="create-note">
@@ -120,6 +127,11 @@ export default {
       MessageService.sendMessage(bandId, mes).then(() => {});
       this.messageText = "";
       this.isReadyForMessage = false;
+    },
+  },
+  computed: {
+    getRouteId() {
+      return this.$route.params.id;
     },
   },
 };

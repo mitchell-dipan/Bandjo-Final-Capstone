@@ -129,9 +129,9 @@ public class BandjoController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @PutMapping(path = "/bands/{id}/updateband")
+    @PutMapping(path = "/bands/{id}/editProfile")
     public void updateBands(@PathVariable int id, @RequestBody Band band){
-        bandDao.updateBand(band);
+        bandDao.updateBand(id,band);
     }
 
     @PreAuthorize("hasRole('USER')")

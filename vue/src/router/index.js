@@ -8,6 +8,7 @@ import store from '../store/index'
 import BandSearch from '../views/BandSearch'
 import BandPage from '../views/BandPage'
 import MakeBand from '../views/MakeBand'
+import EditProfileView from '../views/EditProfileView'
 
 
 Vue.use(Router)
@@ -66,6 +67,14 @@ const router = new Router({
       }
     },
     {
+      path: "/bands/:id/editProfile",
+      name: "bands-edit-profile",
+      component: EditProfileView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: "/bands/:id",
       name: "page",
       component: BandPage,
@@ -81,6 +90,7 @@ const router = new Router({
         requiresAuth: true
       }
     },
+
   ]
 })
 

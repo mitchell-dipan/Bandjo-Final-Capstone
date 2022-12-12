@@ -54,7 +54,11 @@ export default {
     },
     sendMessage(bandId, message) {
         return axios.post(`/bands/${bandId}/sendMessage?messages=${message}`);
+    },
+    updateBand(id, band) {
+        return axios.put(`/bands/${id}/editProfile`, band);
     }
+
 
     // get(id) {
     //     return http.get(`/messages/${id}`);
