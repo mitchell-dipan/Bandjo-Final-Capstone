@@ -14,31 +14,39 @@
         </div>
       </div>
       <div id="buttons">
-        <div id="edit-profile" @click="unfollowBand" v-if="status === true">
+        <div class="button-style" @click="unfollowBand" v-if="status === true">
           Following
         </div>
-        <div id="edit-profile" @click="followBand" v-else>Follow</div>
+        <div class="button-style" @click="followBand" v-else>Follow</div>
         <button
-          id="edit-profile"
+          class="button-style"
           v-if="band.userID == this.$store.state.user.id"
         >
           Edit Profile
         </button>
-        <button
-          id="edit-profile"
-          v-if="band.userID == this.$store.state.user.id"
-          @click="isReadyForMessage = !isReadyForMessage"
-        >
-          Message Followers
-        </button>
-        <input
-          type="text"
-          placeholder="Type Message Here"
-          v-show="isReadyForMessage"
-          v-model="messageText"
-        />
-        <button v-show="isReadyForMessage" @click="sendMessage">Send</button>
       </div>
+    </div>
+    <div id="create-note">
+      <button
+        id="create-note-button"
+        v-if="band.userID == this.$store.state.user.id"
+        @click="isReadyForMessage = !isReadyForMessage"
+      >
+        Write a Note
+      </button>
+      <textarea
+        type="text"
+        placeholder="Type Message Here"
+        v-show="isReadyForMessage"
+        v-model="messageText"
+      />
+      <button
+        id="send-note-button"
+        v-show="isReadyForMessage"
+        @click="sendMessage"
+      >
+        Send
+      </button>
     </div>
     <div class="upcoming-shows">
       <h2>Upcoming</h2>
@@ -125,7 +133,6 @@ export default {
   align-items: center;
   margin-left: 20%;
   width: 70%;
-  border-left: #2d3142 solid 2px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
@@ -133,7 +140,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-left: 3%;
+  margin-left: 15%;
 }
 .profile img {
   object-fit: cover;
@@ -175,9 +182,10 @@ export default {
   font-weight: bold;
   color: white;
 }
-#edit-profile {
+.button-style {
   padding: 0.75rem 1.25rem;
   border-radius: 10rem;
+  border-color: #ef8354;
   color: #fff;
   text-transform: uppercase;
   font-size: 1rem;
@@ -187,6 +195,42 @@ export default {
   z-index: 1;
   background-color: #ef8354;
   margin-left: 2%;
+}
+.button-style:hover {
+  background-color: #ee7642;
+}
+#create-note {
+  display: flex;
+  width: 75vw;
+  align-self: flex-start;
+  margin-left: 5%;
+  margin-top: 2%;
+}
+#create-note-button {
+  padding: 0.75rem 1.25rem;
+  border-radius: 10rem;
+  background-color: #ef8354;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.15rem;
+  border-color: #ef8354;
+}
+#create-note-button:hover {
+  background-color: #ee7642;
+}
+#create-note textarea {
+  width: 50vw;
+  font-size: 2em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+#send-note-button {
+  background-color: #2d3142;
+  border-radius: 0px 2rem 2rem 0px;
+  color: #fff;
+  font-size: 2em;
+  padding: 2%;
 }
 .upcoming-shows {
   display: flex;
