@@ -20,4 +20,6 @@ public interface ShowDao {
     List<Show> getShowsByBandId(int id);
 
     void addShowForBand(Show show);
+
+    void deleteShowFromBand(int bandId, int showId);
 }

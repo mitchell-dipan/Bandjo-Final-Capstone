@@ -41,10 +41,8 @@ public class JdbcPicturesDao implements PicturesDao {
     }
 
     @Override
-    public void deletePicturesFromBand(int id, Pictures[] pictures) {
+    public void deletePicturesFromBand(int bandId, int pictureId) {
         String sql = "DELETE FROM pictures WHERE band_id = ? AND picture_id = ?;";
-        for (Pictures picture : pictures){
-            jdbcTemplate.update(sql,id,picture.getPicture_id());
+            jdbcTemplate.update(sql,bandId,pictureId);
         }
     }
-}

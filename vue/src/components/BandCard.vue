@@ -69,7 +69,9 @@
     <div class="picture-gallery">
       <h2>Gallery</h2>
       <ul v-for="picture in pictures" v-bind:key="picture.id">
-        <li><img v-bind:src="picture.pic_url" /></li>
+        <li>
+          <img v-bind:src="picture.pic_url" />
+        </li>
       </ul>
     </div>
   </div>
@@ -90,6 +92,7 @@ export default {
       follow: "Follow",
       isReadyForMessage: false,
       messageText: "",
+      showEdits: false,
     };
   },
   created() {
@@ -109,6 +112,9 @@ export default {
     MessageService.checkFollowStatus(bandId).then((r) => {
       this.status = r.data;
     });
+    if (this.band.userId == this.$store.state.user.id) {
+      this.showEdits = true;
+    }
   },
   methods: {
     followBand() {
@@ -294,6 +300,7 @@ export default {
   margin-left: 5%;
   background-color: #2d3142;
   padding-top: 2%;
+  margin-bottom: 5%;
 }
 .picture-gallery li {
   list-style: none;

@@ -60,6 +60,12 @@ export default {
     },
     deleteGenreFromBand(id, genreId) {
         return axios.delete(`/bands/${id}/deleteGenre?genreId=${genreId}`);
+    },
+    deletePictureFromBandGallery(id, pictureId) {
+        return axios.delete(`/bands/${id}/deletePictures?pictureId=${pictureId}`)
+    },
+    deleteShow(id, showId) {
+        return axios.delete(`/bands/${id}/deleteShows?showId=${showId}`)
     }
 
     // get(id) {

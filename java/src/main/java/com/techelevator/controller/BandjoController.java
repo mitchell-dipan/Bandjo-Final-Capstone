@@ -141,9 +141,13 @@ public class BandjoController {
     }
 
     @PreAuthorize("hasRole('USER')")
-    @DeleteMapping(path = "/bands/{id}/deletepictures")
-    public void deletePictures(@PathVariable int id, @RequestBody Pictures[] pictures){
-        picturesDao.deletePicturesFromBand(id,pictures);
+    @DeleteMapping(path = "/bands/{id}/deletePictures")
+    public void deletePictures(@PathVariable int id, @RequestParam int pictureId){
+        picturesDao.deletePicturesFromBand(id,pictureId);
     }
-
+    @PreAuthorize("hasRole('USER')")
+    @DeleteMapping(path = "/bands/{id}/deleteShows")
+    public void deleteShows(@PathVariable int id, @RequestParam int showId){
+        showDao.deleteShowFromBand(id,showId);
+    }
 }

@@ -1,49 +1,104 @@
 <template>
   <div class="main">
-    <h2>Name</h2>
-    <input class="type" type="text" v-model="updateBand.name" />
-    <h2>Description</h2>
-    <input class="type" type="text" v-model="updateBand.description" />
-    <h2>Members</h2>
-    <input class="type" type="text" v-model="updateBand.members" />
-    <h2>Profile Picture URL</h2>
-    <input class="type" type="text" v-model="updateBand.profilePic" />
-    <input
-      type="text"
-      id="genre-search-bar"
-      v-model="searchGenre.genreName"
-      placeholder="Type any genre..."
-    />
-    <div id="results-box">
-      <div
-        v-for="genre in filteredGenres"
-        v-bind:key="genre.genreId"
-        class="results"
-      >
-        <p class="genre-bubble" @click="addGenre(genre.genreName)">
-          {{ genre.genreName }}
-        </p>
-      </div>
-    </div>
-    <div id="current-genres">
-      <h3>Current Genres</h3>
-      <div id="genre-list">
-        <ul v-for="genre in yourGenres" v-bind:key="genre.id">
-          <li class="genre-bubble">
+    <div>
+      <h1 id="title">Edit Band</h1>
+      <h2>Name</h2>
+      <input class="type" type="text" v-model="updateBand.name" />
+      <h2>Description</h2>
+      <input class="type" type="text" v-model="updateBand.description" />
+      <h2>Members</h2>
+      <input class="type" type="text" v-model="updateBand.members" />
+      <h2>Profile Picture URL</h2>
+      <input class="type" type="text" v-model="updateBand.profilePic" />
+      <input
+        type="text"
+        class="type"
+        v-model="searchGenre.genreName"
+        placeholder="Type any genre..."
+      />
+
+      <div id="results-box">
+        <div
+          v-for="genre in filteredGenres"
+          v-bind:key="genre.genreId"
+          class="results"
+        >
+          <p class="genre-bubble" @click="addGenre(genre.genreName)">
             {{ genre.genreName }}
-            <button @click="removeGenre(genre)">X</button>
+          </p>
+        </div>
+      </div>
+
+      <div id="current-genres">
+        <h3>Current Genres</h3>
+        <div id="genre-list">
+          <ul v-for="genre in yourGenres" v-bind:key="genre.id">
+            <li class="genre-bubble">
+              {{ genre.genreName }}
+              <button @click="removeGenre(genre)">X</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h2>Add Show's</h2>
+        <input
+          class="type"
+          type="text"
+          placeholder="Name of Show"
+          v-model="show.showName"
+        />
+        <input
+          class="type"
+          type="date"
+          placeholder="Show date"
+          v-model="show.showDate"
+        />
+        <input
+          class="type"
+          type="text"
+          placeholder="Show Location"
+          v-model="show.showLocation"
+        />
+        <button class="button" @click="addShow()">Add Show</button>
+
+        <div class="upcoming-shows">
+          <h2>Upcoming Shows</h2>
+          <ul v-for="show in shows" v-bind:key="show.id">
+            <li>
+              {{ show.showName }} <br />
+              {{ show.showLocation }} <br />
+              {{ show.showDate }}
+              <button @click="deleteShow(show)">Delete</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <h2>Add Pictures to Your Gallery</h2>
+      <input
+        class="type"
+        type="text"
+        placeholder="Band Pictures"
+        v-model="picture.pic_url"
+      />
+      <button class="button" @click="addPicture()">Add Picture</button>
+      <div class="picture-gallery">
+        <h2>Gallery</h2>
+        <ul v-for="picture in pictures" v-bind:key="picture.id">
+          <li>
+            <img v-bind:src="picture.pic_url" />
+            <button @click="removePicture(picture)">Delete</button>
           </li>
         </ul>
       </div>
+      <button
+        id="save-changes"
+        type="submit"
+        @click="updateBandProfile(updateBand)"
+      >
+        Save Changes
+      </button>
     </div>
-
-    <button
-      id="save-changes"
-      type="submit"
-      @click="updateBandProfile(updateBand)"
-    >
-      Save Changes
-    </button>
   </div>
 </template>
 
@@ -71,6 +126,15 @@ export default {
       },
       genresFromData: [],
       yourGenres: [],
+      pictures: [],
+      picture: { band_id: "", pic_url: "" },
+      shows: [],
+      show: {
+        bandId: "",
+        showName: "",
+        showDate: "",
+        showLocation: "",
+      },
     };
   },
   created() {
@@ -87,6 +151,12 @@ export default {
     });
     MessageService.getAllGenres().then((r) => {
       this.genresFromData = r.data;
+    });
+    MessageService.getPictures(bandId).then((r) => {
+      this.pictures = r.data;
+    });
+    MessageService.getShows(bandId).then((r) => {
+      this.shows = r.data;
     });
   },
   methods: {
@@ -109,6 +179,39 @@ export default {
     updateBandProfile(band) {
       MessageService.updateBand(this.$route.params.id, band);
       this.$router.push(`/bands/${this.$route.params.id}`);
+    },
+    removePicture(picture) {
+      MessageService.deletePictureFromBandGallery(
+        this.$route.params.id,
+        picture.picture_id
+      );
+      const index = this.pictures.indexOf(picture);
+      this.pictures.splice(index, 1);
+    },
+    addPicture() {
+      const newPic = {
+        pic_url: this.picture.pic_url,
+      };
+      this.pictures.push(newPic);
+      this.picture.pic_url = "";
+      MessageService.addPicture(this.$route.params.id, newPic);
+    },
+    deleteShow(show) {
+      MessageService.deleteShow(this.$route.params.id, show.showId);
+      const index = this.shows.indexOf(show);
+      this.shows.splice(index, 1);
+    },
+    addShow() {
+      const newShow = {
+        showName: this.show.showName,
+        showDate: this.show.showDate,
+        showLocation: this.show.showLocation,
+      };
+      this.shows.push(newShow);
+      this.show.showName = "";
+      this.show.showDate = "";
+      this.show.showLocation = "";
+      MessageService.addShow(this.$route.params.id, newShow);
     },
   },
   computed: {
@@ -135,39 +238,37 @@ export default {
   position: relative;
   flex-direction: column;
   align-items: center;
-  margin-left: 20%;
+  margin-left: 25%;
   width: 70%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
+#title {
+  font-weight: lighter;
+  font-size: 3em;
+}
 .main h2 {
-  align-self: flex-start;
-  margin-top: 2%;
-  margin-left: 5%;
-  font-size: 2em;
+  font-size: 3em;
   font-weight: 400;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 .type {
-  width: 80%;
+  width: 50%;
   box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px white;
   border-radius: 16px;
   text-align: left;
-  padding: 5%;
-  margin-top: 3%;
+  padding: 2%;
+  margin-top: 1%;
   background-color: white;
-  font-size: 2em;
 }
 .type::placeholder {
   font-size: 2em;
   text-align: center;
 }
-
 #results-box {
   display: flex;
   align-items: center;
-  align-self: flex-start;
-  margin-left: 5%;
-  margin-top: 1%;
 }
 .genre-bubble {
   margin-top: 5%;
@@ -187,7 +288,6 @@ export default {
   border-radius: 16px;
   text-align: left;
   padding: 5%;
-  margin-top: 3%;
   background-color: white;
   font-size: 2em;
 }
@@ -199,8 +299,9 @@ export default {
   display: flex;
   color: white;
   flex-direction: column;
+  flex-wrap: wrap;
   background-color: #2d3142;
-  width: 30vw;
+  width: 80%;
   padding: 5%;
   align-items: center;
   border-radius: 2rem;
@@ -230,5 +331,67 @@ export default {
   background-color: #ef8354;
   margin-top: 2%;
   margin-bottom: 3%;
+}
+.picture-gallery h2 {
+  margin-left: 5%;
+  margin-bottom: 3%;
+  font-size: 1.7em;
+  color: white;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+.picture-gallery {
+  display: flex;
+  align-self: flex-start;
+  flex-wrap: wrap;
+  width: 70vw;
+  margin-top: 2%;
+  background-color: #2d3142;
+  padding-top: 2%;
+  margin-bottom: 5%;
+}
+.picture-gallery li {
+  list-style: none;
+}
+.picture-gallery li img {
+  width: 15vw;
+  height: 30vh;
+  object-fit: cover;
+  opacity: 0.7;
+  transition: 1s ease;
+}
+.picture-gallery li img:hover {
+  opacity: 1;
+  transition: 0.5s ease;
+}
+.upcoming-shows ul li {
+  list-style: none;
+  font-size: 1.5em;
+  color: white;
+  background: #ef8354;
+  padding-top: 7%;
+  padding-bottom: 7%;
+
+  text-align: center;
+  width: 15vw;
+  margin-right: 10%;
+}
+.button {
+  padding: 0.75rem 1.25rem;
+  border-radius: 5rem 5rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  overflow: hidden;
+  z-index: 1;
+  background-color: #ef8354;
+  margin-top: 2%;
+}
+#add-show {
+  display: flex;
+  flex-direction: column;
 }
 </style>

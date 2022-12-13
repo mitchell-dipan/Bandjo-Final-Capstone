@@ -10,5 +10,5 @@ public interface PicturesDao {
 
     void createPicture(Pictures picture);
 
-    void deletePicturesFromBand(int id, Pictures[] pictures);
+    void deletePicturesFromBand(int bandId, int pictureId);
 }

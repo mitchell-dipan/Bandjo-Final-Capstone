@@ -45,10 +45,11 @@ public class JdbcShowDao implements ShowDao{
 
     @Override
     public List<Show> getShowsByBandId(int id) {
+        LocalDate local = LocalDate.now();
         String sql = "SELECT band_id, show_id, show_name, show_date, show_location\n" +
                 "FROM shows\n" +
-                "WHERE band_id = ?;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+                "WHERE band_id = ? AND show_date >= ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id, local);
         List<Show> shows = new ArrayList<>();
         while(results.next()){
 
@@ -66,8 +67,13 @@ public class JdbcShowDao implements ShowDao{
 
     @Override
     public void addShowForBand(Show show) {
-        String sql = "INSERT INTO shows(band_id, show_name, show_date, show_location) VALUES (?,?,?,?);";
-        int id = jdbcTemplate.queryForObject(sql,Integer.class, show.getBandId(), show.getShowName(),
-                show.getShowDate(), show.getShowLocation());
+            String sql = "INSERT INTO shows(band_id, show_name, show_date, show_location) VALUES (?,?,?,?);";
+            int id = jdbcTemplate.queryForObject(sql, Integer.class, show.getBandId(), show.getShowName(),
+                    show.getShowDate(), show.getShowLocation());
+    }
+    @Override
+    public void deleteShowFromBand(int bandId, int showId) {
+        String sql = "DELETE FROM shows WHERE band_id = ? AND show_id = ?;";
+        jdbcTemplate.update(sql,bandId,showId);
     }
 }
