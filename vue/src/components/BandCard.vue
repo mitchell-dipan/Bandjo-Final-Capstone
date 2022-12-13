@@ -1,38 +1,45 @@
 <template>
   <div class="card">
-    <div class="profile">
-      <img v-bind:src="band.profilePic" />
+    <div id="profile-and-genres">
+      <div class="profile">
+        <img id="profile-picture" v-bind:src="band.profilePic" />
+        <div id="everything-but-the-profile-picture">
+          <div id="name-and-buttons">
+            <h1 id="band-name">{{ band.name }}</h1>
+            <button
+              class="follow-button"
+              @click="unfollowBand"
+              v-if="status === true"
+            >
+              Following
+            </button>
+            <button class="follow-button" @click="followBand" v-else>
+              Follow
+            </button>
+            <router-link
+              :to="{
+                name: 'bands-edit-profile',
+                params: { id: this.$route.params.id },
+              }"
+            >
+            </router-link>
+          </div>
 
-      <div class="title-members">
-        <h1>{{ band.name }}</h1>
-        <p id="description">{{ band.description }}</p>
-        <p>{{ band.members }}</p>
-        <div class="genre-box">
-          <ul v-for="genre in genres" v-bind:key="genre.id">
-            <li>{{ genre.genreName }}</li>
-          </ul>
+          <div>
+            <p id="description">{{ band.description }}</p>
+            <p id="members">{{ band.members }}</p>
+          </div>
         </div>
       </div>
-      <div id="buttons">
-        <div class="button-style" @click="unfollowBand" v-if="status === true">
-          Following
-        </div>
-        <div class="button-style" @click="followBand" v-else>Follow</div>
-        <router-link
-          :to="{
-            name: 'bands-edit-profile',
-            params: { id: this.$route.params.id },
-          }"
-        >
-          <button
-            class="button-style"
-            v-if="band.userID == this.$store.state.user.id"
-          >
-            Edit Profile
-          </button>
-        </router-link>
+      <div class="genre-box">
+        <ul v-for="genre in genres" v-bind:key="genre.id">
+          <li>{{ genre.genreName }}</li>
+        </ul>
       </div>
     </div>
+    <button v-if="band.userID == this.$store.state.user.id">
+      Edit Profile
+    </button>
     <div id="create-note">
       <button
         id="create-note-button"
@@ -55,9 +62,8 @@
         Send
       </button>
     </div>
+    <h2>Upcoming Shows</h2>
     <div class="upcoming-shows">
-      <h2>Upcoming</h2>
-      <h2 id="shows">Shows</h2>
       <ul v-for="show in shows" v-bind:key="show.id">
         <li>
           {{ show.showName }} <br />
@@ -153,40 +159,73 @@ export default {
   width: 70%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: white;
+}
+#profile-and-genres {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 .profile {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-left: 15%;
 }
-.profile img {
-  object-fit: cover;
-  width: 20%;
+#profile-picture {
   align-self: flex-start;
-  margin-top: 2%;
+  width: 10vw;
+  height: 20vh;
   border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
 }
-.profile h1 {
+#everything-but-the-profile-picture {
+  display: flex;
+  flex-direction: column;
+}
+#band-name {
   font-size: 3em;
-}
-.title-members {
   margin-left: 2%;
 }
-.title-members p {
-  margin-top: 2%;
-  font-size: 2em;
+.follow-button {
+  border-radius: 50px;
+  border-color: #ef8354;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1em;
+  letter-spacing: 2px;
+  background-color: #ef8354;
+  margin-left: 5%;
+  width: 7.5vw;
+  height: 5vh;
+}
+.button-style {
+  border-radius: 10rem;
+  border-color: #ef8354;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 10%;
+  background-color: #ef8354;
+  margin-left: 2%;
+  width: 10vw;
+}
+#name-and-buttons {
+  width: 30vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 #description {
   font-style: italic;
+  margin-left: 2%;
+  font-size: 2em;
 }
-#buttons {
-  display: flex;
-  justify-content: flex-end;
-  width: 35vw;
+#members {
+  margin-left: 2%;
+  font-size: 2em;
 }
 .genre-box {
   display: flex;
+  justify-self: flex-start;
   margin-top: 4%;
 }
 .genre-box li {
@@ -199,20 +238,6 @@ export default {
   border-radius: 10px;
   font-weight: bold;
   color: white;
-}
-.button-style {
-  padding: 0.75rem 1.25rem;
-  border-radius: 10rem;
-  border-color: #ef8354;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 1rem;
-  letter-spacing: 0.15rem;
-  transition: all 0.3s;
-  overflow: hidden;
-  z-index: 1;
-  background-color: #ef8354;
-  margin-left: 2%;
 }
 .button-style:hover {
   background-color: #ee7642;
@@ -240,6 +265,7 @@ export default {
 #create-note textarea {
   width: 50vw;
   font-size: 2em;
+  border-radius: 20px 0px 0px 20px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
@@ -275,9 +301,9 @@ export default {
   color: white;
   background: #ef8354;
   padding-top: 10%;
-  padding-bottom: 10%;
-
+  border-radius: 100%;
   text-align: center;
+  height: 15vh;
   width: 15vw;
   margin-right: 10%;
 }

@@ -62,8 +62,8 @@
         />
         <button class="button" @click="addShow()">Add Show</button>
 
+        <h2>Upcoming Shows</h2>
         <div class="upcoming-shows">
-          <h2>Upcoming Shows</h2>
           <ul v-for="show in shows" v-bind:key="show.id">
             <li>
               {{ show.showName }} <br />
@@ -165,9 +165,17 @@ export default {
         genreName: g,
         // genreId: this.searchGenre.genreId,
       };
-      MessageService.addGenreToBand(this.$route.params.id, newGenre);
-      this.yourGenres.push(newGenre);
-      this.searchGenre.genreName = "";
+      let bool = true;
+      this.yourGenres.forEach((g) => {
+        if (g.genreName == newGenre.genreName) {
+          bool = false;
+        }
+      });
+      if (bool) {
+        MessageService.addGenreToBand(this.$route.params.id, newGenre);
+        this.yourGenres.push(newGenre);
+        this.searchGenre.genreName = "";
+      }
       // this.searchGenre.genreId = "";
     },
     removeGenre(genre) {
@@ -372,7 +380,7 @@ export default {
   background: #ef8354;
   padding-top: 7%;
   padding-bottom: 7%;
-
+  margin-bottom: 2%;
   text-align: center;
   width: 15vw;
   margin-right: 10%;
@@ -393,5 +401,9 @@ export default {
 #add-show {
   display: flex;
   flex-direction: column;
+}
+.upcoming-shows {
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>

@@ -129,9 +129,11 @@ main {
 }
 .top-row img {
   width: 10%;
-  border: 1px solid black;
-  border-radius: 100%;
+  height: 10%;
+  border-radius: 50%;
   margin-left: 2%;
+  object-fit: cover;
+  object-position: center right;
 }
 .top-row h1 {
   margin-right: 35%;

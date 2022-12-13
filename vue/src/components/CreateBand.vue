@@ -168,8 +168,17 @@ export default {
         genreName: g,
         // genreId: this.searchGenre.genreId,
       };
-      this.genres.push(newGenre);
-      this.searchGenre.genreName = "";
+      let bool = true;
+      this.genres.forEach((g) => {
+        if (g.genreName == newGenre.genreName) {
+          bool = false;
+        }
+      });
+      if (bool) {
+        this.genres.push(newGenre);
+        this.searchGenre.genreName = "";
+      }
+
       // this.searchGenre.genreId = "";
     },
   },
@@ -183,7 +192,7 @@ export default {
         genreList = genreList.filter((genre) =>
           genre.genreName
             .toLowerCase()
-            .includes(this.searchGenre.genreName.toLowerCase())
+            .startsWith(this.searchGenre.genreName.toLowerCase())
         );
         return genreList;
       } else {
