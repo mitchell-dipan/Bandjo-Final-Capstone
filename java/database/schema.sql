@@ -43,7 +43,7 @@ CREATE TABLE followers
 CREATE TABLE messages
 (
 	message_date DATE NOT NULL,
-	message_content varchar(1000) NOT NULL,
+	message_content varchar(5000) NOT NULL,
 	band_id INTEGER NOT NULL,
 	message_id SERIAL NOT NULL,
 	
