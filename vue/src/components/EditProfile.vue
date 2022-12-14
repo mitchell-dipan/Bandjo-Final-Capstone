@@ -30,18 +30,16 @@
       </div>
 
       <div id="current-genres">
-        <h3>Current Genres</h3>
-        <div id="genre-list">
-          <ul v-for="genre in yourGenres" v-bind:key="genre.id">
-            <li class="genre-bubble">
-              {{ genre.genreName }}
-              <button @click="removeGenre(genre)">X</button>
-            </li>
-          </ul>
+        <h3>Current Genres:</h3>
+        <div id="genre-list" v-for="genre in yourGenres" v-bind:key="genre.id">
+          <p>
+            {{ genre.genreName }}
+            <button @click="removeGenre(genre)">X</button>
+          </p>
         </div>
       </div>
-      <div>
-        <h2>Add Show's</h2>
+      <div id="add-shows">
+        <h2>Add Shows</h2>
         <input
           class="type"
           type="text"
@@ -60,30 +58,35 @@
           placeholder="Show Location"
           v-model="show.showLocation"
         />
-        <button class="button" @click="addShow()">Add Show</button>
-
-        <h2>Upcoming Shows</h2>
-        <div class="upcoming-shows">
-          <ul v-for="show in shows" v-bind:key="show.id">
-            <li>
-              {{ show.showName }} <br />
-              {{ show.showLocation }} <br />
-              {{ show.showDate }}
-              <button @click="deleteShow(show)">Delete</button>
-            </li>
-          </ul>
-        </div>
       </div>
-      <h2>Add Pictures to Your Gallery</h2>
-      <input
-        class="type"
-        type="text"
-        placeholder="Band Pictures"
-        v-model="picture.pic_url"
-      />
+      <button class="button" @click="addShow()">Add Show</button>
+
+      <h2>Current Shows:</h2>
+      <div id="current-shows">
+        <ul v-for="show in shows" v-bind:key="show.id">
+          <li>
+            <div id="show-date">
+              {{ show.showDate }}
+            </div>
+            <div id="show-name">{{ show.showName }} <br /></div>
+            <div id="show-location">{{ show.showLocation }} <br /></div>
+            <button @click="deleteShow(show)">Delete Show</button>
+          </li>
+        </ul>
+        <div id="vl" v-if="this.shows.length > 0"></div>
+      </div>
+      <div id="add-pictures">
+        <h2>Add Pictures to Your Gallery</h2>
+        <input
+          class="type"
+          type="text"
+          placeholder="Band Pictures"
+          v-model="picture.pic_url"
+        />
+      </div>
       <button class="button" @click="addPicture()">Add Picture</button>
-      <div class="picture-gallery">
-        <h2>Gallery</h2>
+      <h3>Gallery:</h3>
+      <div id="picture-gallery">
         <ul v-for="picture in pictures" v-bind:key="picture.id">
           <li>
             <img v-bind:src="picture.pic_url" />
@@ -92,7 +95,7 @@
         </ul>
       </div>
       <button
-        id="save-changes"
+        class="button"
         type="submit"
         @click="updateBandProfile(updateBand)"
       >
@@ -246,164 +249,165 @@ export default {
   position: relative;
   flex-direction: column;
   align-items: center;
-  margin-left: 25%;
+  margin-left: 7%;
   width: 70%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: white;
 }
 #title {
-  font-weight: lighter;
+  font-weight: 400;
   font-size: 3em;
 }
 .main h2 {
-  font-size: 3em;
+  font-size: 2.5em;
   font-weight: 400;
   margin-top: 1%;
   margin-bottom: 1%;
 }
 .type {
-  width: 50%;
+  width: 70%;
   box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px white;
   border-radius: 16px;
   text-align: left;
-  padding: 2%;
-  margin-top: 1%;
+  padding: 3%;
+  margin-bottom: 2%;
+  font-size: 1.5em;
   background-color: white;
 }
-.type::placeholder {
-  font-size: 2em;
-  text-align: center;
-}
+
 #results-box {
   display: flex;
   align-items: center;
 }
-.genre-bubble {
-  margin-top: 5%;
-  margin-left: 2%;
-  padding-right: 2vw;
-  padding-left: 2vw;
-  padding-top: 2vh;
-  padding-bottom: 2vh;
+#current-genres {
+  display: flex;
+  align-items: center;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+#current-genres h3 {
+  align-self: flex-start;
+}
+h3 {
+  font-size: 1.4em;
+  font-weight: lighter;
+}
+#current-genres p {
+  margin-left: 8%;
+  padding-right: 1vw;
+  padding-left: 1vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
   background-color: #ef8354;
   border-radius: 10px;
   font-weight: bold;
   color: white;
 }
-#genre-search-bar {
-  width: 80%;
-  box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px white;
-  border-radius: 16px;
-  text-align: left;
-  padding: 5%;
-  background-color: white;
-  font-size: 2em;
+#current-genres button {
+  color: black;
+  background-color: #ef8354;
 }
-#genre-search-bar::placeholder {
-  font-size: 2em;
-  text-align: left;
-}
-#current-genres {
+#current-shows {
   display: flex;
-  color: white;
-  flex-direction: column;
+  align-self: flex-start;
   flex-wrap: wrap;
-  background-color: #2d3142;
-  width: 80%;
-  padding: 5%;
-  align-items: center;
-  border-radius: 2rem;
-  margin-top: 2%;
+  margin-left: 2%;
+  margin-bottom: 5%;
+  padding-top: 2%;
+  border-radius: 20px;
 }
-#current-genres h3 {
-  align-self: flex-start;
-}
-#genre-list {
+#current-shows ul li {
   display: flex;
-  margin-top: 2%;
-  align-self: flex-start;
-}
-#current-genres li {
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.5em;
   list-style: none;
+  color: white;
+  text-align: left;
+  border-left: 1px solid white;
+  height: 20vh;
+  width: 120%;
 }
-#save-changes {
-  padding: 0.75rem 1.25rem;
-  border-radius: 10rem;
+#current-shows button {
+  color: black;
+  background-color: #fff;
+  border: none;
+  border-radius: 15px;
+  width: 50%;
+  margin-top: 10%;
+  margin-left: 2%;
+}
+#show-name {
+  color: #ee7642;
+  font-weight: 900;
+  padding-left: 5%;
+  margin-bottom: 2%;
+}
+#show-location {
+  font-weight: 700;
+  padding-left: 5%;
+}
+#show-date {
+  font-size: 0.85em;
+  padding-left: 5%;
+}
+#vl {
+  height: 20vh;
+  margin-left: 2%;
+  border-left: 1px solid white;
+  align-self: flex-end;
+}
+.button {
+  border-radius: 50px;
+  border-color: #2d3142;
+  border: none;
   color: #fff;
   text-transform: uppercase;
-  font-size: 1rem;
-  letter-spacing: 0.15rem;
-  transition: all 0.3s;
-  overflow: hidden;
-  z-index: 1;
-  background-color: #ef8354;
+  font-size: 1em;
+  letter-spacing: 2px;
+  background-color: white;
+  color: #2d3142;
   margin-top: 2%;
-  margin-bottom: 3%;
+  margin-bottom: 2%;
+  width: 7.5vw;
+  height: 5vh;
 }
-.picture-gallery h2 {
-  margin-left: 5%;
-  margin-bottom: 3%;
-  font-size: 1.7em;
+.button:hover {
+  background-color: #2d3142;
   color: white;
-  writing-mode: vertical-rl;
-  text-orientation: upright;
 }
-
-.picture-gallery {
+#picture-gallery {
   display: flex;
   align-self: flex-start;
   flex-wrap: wrap;
-  width: 70vw;
   margin-top: 2%;
-  background-color: #2d3142;
-  padding-top: 2%;
   margin-bottom: 5%;
 }
-.picture-gallery li {
+#picture-gallery li {
   list-style: none;
 }
-.picture-gallery li img {
+#picture-gallery li img {
   width: 15vw;
   height: 30vh;
   object-fit: cover;
   opacity: 0.7;
   transition: 1s ease;
 }
-.picture-gallery li img:hover {
+#picture-gallery li img:hover {
   opacity: 1;
   transition: 0.5s ease;
 }
-.upcoming-shows ul li {
-  list-style: none;
-  font-size: 1.5em;
-  color: white;
-  background: #ef8354;
-  padding-top: 7%;
-  padding-bottom: 7%;
-  margin-bottom: 2%;
-  text-align: center;
-  width: 15vw;
-  margin-right: 10%;
+#picture-gallery button {
+  color: black;
+  background-color: #fff;
+  border: none;
+  border-radius: 15px;
+  width: 20%;
 }
-.button {
-  padding: 0.75rem 1.25rem;
-  border-radius: 5rem 5rem;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 1rem;
-  letter-spacing: 0.15rem;
-  transition: all 0.3s;
-  overflow: hidden;
-  z-index: 1;
-  background-color: #ef8354;
-  margin-top: 2%;
-}
+
 #add-show {
   display: flex;
   flex-direction: column;
-}
-.upcoming-shows {
-  display: flex;
-  flex-wrap: wrap;
 }
 </style>

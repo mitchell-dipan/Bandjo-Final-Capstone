@@ -1,6 +1,8 @@
 <template>
   <div class="main">
     <div id="search">
+      <img src="../../assets/bandjo-logo-final-removebg-preview.png" />
+      <h1>Explore</h1>
       <input
         type="text"
         id="bandNameFilter"
@@ -61,7 +63,7 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 90vh;
+  height: 200vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
@@ -70,8 +72,18 @@ export default {
   flex-direction: column;
   width: 50%;
 }
+img {
+  width: 45%;
+  align-self: center;
+}
+h1 {
+  margin-top: 1%;
+  font-size: 4em;
+  font-weight: 400;
+  color: white;
+}
 input {
-  margin-top: 25%;
+  margin-top: 5%;
   width: 100%;
   padding: 2%;
   font-size: 2em;

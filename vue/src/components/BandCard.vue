@@ -1,49 +1,50 @@
 <template>
   <div class="card">
-    <div id="profile-and-genres">
-      <div class="profile">
-        <img id="profile-picture" v-bind:src="band.profilePic" />
-        <div id="everything-but-the-profile-picture">
-          <div id="name-and-buttons">
-            <h1 id="band-name">{{ band.name }}</h1>
-            <button
-              class="follow-button"
-              @click="unfollowBand"
-              v-if="status === true"
-            >
-              Following
-            </button>
-            <button class="follow-button" @click="followBand" v-else>
-              Follow
-            </button>
-            <router-link
-              :to="{
-                name: 'bands-edit-profile',
-                params: { id: this.$route.params.id },
-              }"
-            >
+    <div id="background-color">
+      <div id="profile-and-genres">
+        <div class="profile">
+          <img id="profile-picture" v-bind:src="band.profilePic" />
+          <div id="everything-but-the-profile-picture">
+            <div id="name-and-buttons">
+              <h1 id="band-name">{{ band.name }}</h1>
               <button
-                id="edit-profile"
-                v-if="band.userID == this.$store.state.user.id"
+                class="follow-button"
+                @click="unfollowBand"
+                v-if="status === true"
               >
-                Edit Profile
+                Following
               </button>
-            </router-link>
-          </div>
+              <button class="follow-button" @click="followBand" v-else>
+                Follow
+              </button>
+              <router-link
+                :to="{
+                  name: 'bands-edit-profile',
+                  params: { id: this.$route.params.id },
+                }"
+              >
+                <button
+                  id="edit-profile"
+                  v-if="band.userID == this.$store.state.user.id"
+                >
+                  Edit Profile
+                </button>
+              </router-link>
+            </div>
 
-          <div id="description-and-members">
-            <p id="description">{{ band.description }}</p>
-            <p id="members">{{ band.members }}</p>
+            <div id="description-and-members">
+              <p id="description">{{ band.description }}</p>
+              <p id="members">{{ band.members }}</p>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="genre-box">
-        <ul v-for="genre in genres" v-bind:key="genre.id">
-          <li>{{ genre.genreName }}</li>
-        </ul>
+        <div class="genre-box">
+          <ul v-for="genre in genres" v-bind:key="genre.id">
+            <li>{{ genre.genreName }}</li>
+          </ul>
+        </div>
       </div>
     </div>
-
     <div id="create-note" v-if="band.userID == this.$store.state.user.id">
       <button
         id="create-note-button"
@@ -170,9 +171,11 @@ export default {
 #profile-and-genres {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-top: 2%;
-  margin-bottom: 7%;
+  align-items: center;
+  padding-top: 2%;
+  padding-bottom: 3%;
+  margin-left: 6.25%;
+  width: 79vw;
 }
 #edit-profile {
   border-radius: 50px;
@@ -182,15 +185,15 @@ export default {
   text-transform: uppercase;
   font-size: 1em;
   letter-spacing: 2px;
-  background-color: #2d3142;
-  color: white;
+  background-color: white;
+  color: #2d3142;
   margin-left: 5%;
   margin-top: 1%;
   width: 7.5vw;
   height: 5vh;
 }
 #edit-profile:hover {
-  background-color: #3a3f55;
+  background-color: rgb(221, 221, 221);
 }
 .profile {
   display: flex;
@@ -219,15 +222,15 @@ export default {
   text-transform: uppercase;
   font-size: 1em;
   letter-spacing: 2px;
-  background-color: #2d3142;
-  color: white;
+  background-color: white;
+  color: #2d3142;
   margin-left: 5%;
   margin-top: 1%;
   width: 7.5vw;
   height: 5vh;
 }
 .follow-button:hover {
-  background-color: #3a3f55;
+  background-color: rgb(221, 221, 221);
 }
 #name-and-buttons {
   width: 120%;
@@ -252,7 +255,9 @@ export default {
   font-size: 1.7em;
 }
 .genre-box {
+  align-self: flex-start;
   display: flex;
+  margin-left: 20%;
   padding-top: 4%;
 }
 .genre-box li {
@@ -280,15 +285,15 @@ export default {
   padding: 0.75rem 1.25rem;
   border-radius: 10rem;
   border: none;
-  background-color: #2d3142;
-  color: #fff;
+  background-color: #fff;
+  color: #2d3142;
   text-transform: uppercase;
   font-size: 1rem;
   letter-spacing: 0.15rem;
   border-color: #ef8354;
 }
 #create-note-button:hover {
-  background-color: #3a3f55;
+  background-color: rgb(221, 221, 221);
 }
 #create-note textarea {
   width: 50vw;

@@ -45,8 +45,17 @@
           </div>
         </div>
       </div>
-      <div>
-        <h1>Add Show's</h1>
+      <div id="current-genres">
+        <h3>Current Genres:</h3>
+        <div id="genre-list" v-for="genre in genres" v-bind:key="genre.id">
+          <p>
+            {{ genre.genreName }}
+            <button @click="removeGenre(genre)">X</button>
+          </p>
+        </div>
+      </div>
+      <div id="add-shows">
+        <h1>Add Shows</h1>
         <input
           class="type"
           type="text"
@@ -65,9 +74,23 @@
           placeholder="Show Location"
           v-model="show.showLocation"
         />
-        <button class="button" @click="addShow()">Add Show</button>
       </div>
-      <div>
+      <button class="button" @click="addShow()">Add Show</button>
+      <h3>Current Shows:</h3>
+      <div id="current-shows">
+        <ul v-for="show in shows" v-bind:key="show.id">
+          <li>
+            <div id="show-date">
+              {{ show.showDate }}
+            </div>
+            <div id="show-name">{{ show.showName }} <br /></div>
+            <div id="show-location">{{ show.showLocation }} <br /></div>
+            <button @click="deleteShow(show)">Delete Show</button>
+          </li>
+        </ul>
+        <div id="vl" v-if="this.shows.length > 0"></div>
+      </div>
+      <div id="add-pictures">
         <h1>Add Pictures to Your Gallery</h1>
         <input
           class="type"
@@ -75,10 +98,19 @@
           placeholder="Band Pictures"
           v-model="picture.pic_url"
         />
-        <button class="button" @click="addPicture()">Add Picture</button>
       </div>
+      <button class="button" @click="addPicture()">Add Picture</button>
+      <h3>Gallery:</h3>
+      <div id="picture-gallery">
+        <ul v-for="picture in pictures" v-bind:key="picture.id">
+          <li>
+            <img v-bind:src="picture.pic_url" />
+            <button @click="removePicture(picture)">Delete</button>
+          </li>
+        </ul>
+      </div>
+      <button class="button" @click.prevent="submitForm()">create</button>
     </div>
-    <button class="button" @click.prevent="submitForm()">create</button>
   </div>
 </template>
 <script>
@@ -115,6 +147,7 @@ export default {
       shows: [],
       genresFromData: [],
       genres: [],
+      yourGenres: [],
     };
   },
   created() {
@@ -181,6 +214,18 @@ export default {
 
       // this.searchGenre.genreId = "";
     },
+    removeGenre(genre) {
+      const index = this.genres.indexOf(genre);
+      this.genres.splice(index, 1);
+    },
+    deleteShow(show) {
+      const index = this.shows.indexOf(show);
+      this.shows.splice(index, 1);
+    },
+    removePicture(picture) {
+      const index = this.pictures.indexOf(picture);
+      this.pictures.splice(index, 1);
+    },
   },
   computed: {
     currentUserId() {
@@ -208,24 +253,20 @@ export default {
   position: relative;
   flex-direction: column;
   align-items: center;
-  margin-left: 10%;
+  margin-left: 18%;
   width: 70%;
-  border-left: #2d3142 solid 2px;
+  color: #fff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 .type {
-  width: 80%;
+  width: 70%;
   box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px white;
   border-radius: 16px;
-  text-align: center;
-  padding: 5%;
-  margin-top: 3%;
+  padding: 3%;
+  margin-top: 1%;
+  font-size: 1.5em;
   background-color: white;
-}
-.type::placeholder {
-  font-size: 2em;
-  text-align: center;
 }
 #results-box {
   display: flex;
@@ -243,21 +284,133 @@ export default {
   font-weight: bold;
   color: white;
 }
+#current-genres {
+  display: flex;
+  align-items: center;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+h3 {
+  font-size: 1.4em;
+  font-weight: 400;
+}
+#current-genres p {
+  margin-left: 8%;
+  padding-right: 1vw;
+  padding-left: 1vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  background-color: #ef8354;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+}
+#current-genres button {
+  color: black;
+  background-color: #ef8354;
+}
+
+#current-shows {
+  display: flex;
+  align-self: flex-start;
+  flex-wrap: wrap;
+  margin-left: 2%;
+  padding-top: 2%;
+  border-radius: 20px;
+}
+#current-shows ul li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.5em;
+  list-style: none;
+  color: white;
+  text-align: left;
+  border-left: 1px solid white;
+  height: 20vh;
+  width: 120%;
+}
+#current-shows button {
+  color: black;
+  background-color: #fff;
+  border: none;
+  border-radius: 15px;
+  width: 50%;
+  margin-top: 10%;
+  margin-left: 2%;
+}
+#show-name {
+  color: #ee7642;
+  font-weight: 900;
+  padding-left: 5%;
+  margin-bottom: 2%;
+}
+#show-location {
+  font-weight: 700;
+  padding-left: 5%;
+}
+#show-date {
+  font-size: 0.85em;
+  padding-left: 5%;
+}
+#vl {
+  height: 20vh;
+  margin-left: 2%;
+  border-left: 1px solid white;
+  align-self: flex-end;
+}
 h1 {
   font-weight: lighter;
   font-size: 3em;
 }
 .button {
-  padding: 0.75rem 1.25rem;
-  border-radius: 10rem;
+  border-radius: 50px;
+  border-color: #2d3142;
+  border: none;
   color: #fff;
   text-transform: uppercase;
-  font-size: 1rem;
-  letter-spacing: 0.15rem;
-  transition: all 0.3s;
-  overflow: hidden;
-  z-index: 1;
-  background-color: #ef8354;
+  font-size: 1em;
+  letter-spacing: 2px;
+  background-color: white;
+  color: #2d3142;
   margin-top: 2%;
+  margin-bottom: 2%;
+  width: 7.5vw;
+  height: 5vh;
+}
+.button:hover {
+  background-color: #2d3142;
+  color: white;
+}
+#add-pictures {
+  margin-bottom: 2%;
+}
+#picture-gallery {
+  display: flex;
+  align-self: flex-start;
+  flex-wrap: wrap;
+  margin-top: 2%;
+  margin-bottom: 5%;
+}
+#picture-gallery li {
+  list-style: none;
+}
+#picture-gallery li img {
+  width: 15vw;
+  height: 30vh;
+  object-fit: cover;
+  opacity: 0.7;
+  transition: 1s ease;
+}
+#picture-gallery li img:hover {
+  opacity: 1;
+  transition: 0.5s ease;
+}
+#picture-gallery button {
+  color: black;
+  background-color: #fff;
+  border: none;
+  border-radius: 15px;
+  width: 20%;
 }
 </style>

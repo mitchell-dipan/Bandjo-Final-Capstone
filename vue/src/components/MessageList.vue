@@ -76,50 +76,54 @@ main {
   align-items: center;
   margin-left: 20%;
   width: 70%;
-  border-left: #2d3142 solid 2px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 #logo-and-button {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  width: 80%;
 }
 #notes-logo {
   align-self: center;
   width: 30%;
+  margin-bottom: 5%;
 }
 .sort-by-button button {
-  padding: 0.75rem 1.25rem;
-  border-radius: 10rem;
+  justify-self: flex-start;
+  border: None;
   color: #fff;
   text-transform: uppercase;
-  font-size: 1rem;
+  font-size: 0.9rem;
   letter-spacing: 0.15rem;
-  transition: all 0.3s;
-  overflow: hidden;
-  z-index: 1;
-  background-color: #ef8354;
+  background: none;
+}
+.sort-by-button button:hover {
+  background-color: #fcfbf4;
+  border-radius: 15px;
+  border: none;
+  color: black;
+  transition-delay: 0.2s;
 }
 .timeline-box {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 5%;
-  width: 70%;
+  width: 45vw;
 }
 #message-box {
   display: flex;
   flex-direction: column;
-  border: solid 1px #ef8354;
-  width: 100%;
+  width: 80%;
   margin-top: 3%;
   padding-bottom: 5%;
   padding-top: 2%;
-  background-color: #2d3142;
+  background-color: #fcfbf4;
   border-radius: 10px;
 }
 #message-box:hover {
-  background-color: #3b4057;
+  background-color: #eeede5;
 }
 .top-row {
   display: flex;
@@ -128,24 +132,24 @@ main {
   padding-bottom: 3%;
 }
 .top-row img {
-  width: 10%;
-  height: 10%;
+  width: 3vw;
+  height: 6vh;
   border-radius: 50%;
-  margin-left: 2%;
   object-fit: cover;
-  object-position: center right;
+  object-position: center;
+  margin-left: 2%;
 }
 .top-row h1 {
   margin-right: 35%;
-  color: white;
+  color: black;
 }
 .top-row p {
   margin-right: 1%;
-  color: white;
+  color: black;
 }
 #message {
   padding-left: 3%;
-  color: white;
+  color: black;
 }
 
 #link {

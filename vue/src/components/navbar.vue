@@ -36,7 +36,7 @@ export default {};
   align-items: flex-start;
   width: 20%;
   height: 100vh;
-  background-color: #2d3142;
+  border-right: 2px solid white;
 }
 img {
   width: 50%;
