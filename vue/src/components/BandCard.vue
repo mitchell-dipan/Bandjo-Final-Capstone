@@ -22,10 +22,16 @@
                 params: { id: this.$route.params.id },
               }"
             >
+              <button
+                id="edit-profile"
+                v-if="band.userID == this.$store.state.user.id"
+              >
+                Edit Profile
+              </button>
             </router-link>
           </div>
 
-          <div>
+          <div id="description-and-members">
             <p id="description">{{ band.description }}</p>
             <p id="members">{{ band.members }}</p>
           </div>
@@ -37,13 +43,10 @@
         </ul>
       </div>
     </div>
-    <button v-if="band.userID == this.$store.state.user.id">
-      Edit Profile
-    </button>
-    <div id="create-note">
+
+    <div id="create-note" v-if="band.userID == this.$store.state.user.id">
       <button
         id="create-note-button"
-        v-if="band.userID == this.$store.state.user.id"
         @click="isReadyForMessage = !isReadyForMessage"
       >
         Write a Note
@@ -62,18 +65,21 @@
         Send
       </button>
     </div>
-    <h2>Upcoming Shows</h2>
+    <h2 class="headline">Upcoming Shows</h2>
     <div class="upcoming-shows">
       <ul v-for="show in shows" v-bind:key="show.id">
         <li>
-          {{ show.showName }} <br />
-          {{ show.showLocation }} <br />
-          {{ show.showDate }}
+          <div id="show-date">
+            {{ show.showDate }}
+          </div>
+          <div id="show-name">{{ show.showName }} <br /></div>
+          <div id="show-location">{{ show.showLocation }} <br /></div>
         </li>
       </ul>
+      <div id="vl"></div>
     </div>
+    <h2 class="headline">Gallery</h2>
     <div class="picture-gallery">
-      <h2>Gallery</h2>
       <ul v-for="picture in pictures" v-bind:key="picture.id">
         <li>
           <img v-bind:src="picture.pic_url" />
@@ -165,6 +171,26 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-top: 2%;
+  margin-bottom: 7%;
+}
+#edit-profile {
+  border-radius: 50px;
+  border-color: #2d3142;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 1em;
+  letter-spacing: 2px;
+  background-color: #2d3142;
+  color: white;
+  margin-left: 5%;
+  margin-top: 1%;
+  width: 7.5vw;
+  height: 5vh;
+}
+#edit-profile:hover {
+  background-color: #3a3f55;
 }
 .profile {
   display: flex;
@@ -183,50 +209,51 @@ export default {
 }
 #band-name {
   font-size: 3em;
-  margin-left: 2%;
+  margin-left: 0%;
 }
 .follow-button {
   border-radius: 50px;
-  border-color: #ef8354;
+  border-color: #2d3142;
+  border: none;
   color: #fff;
   text-transform: uppercase;
   font-size: 1em;
   letter-spacing: 2px;
-  background-color: #ef8354;
+  background-color: #2d3142;
+  color: white;
   margin-left: 5%;
+  margin-top: 1%;
   width: 7.5vw;
   height: 5vh;
 }
-.button-style {
-  border-radius: 10rem;
-  border-color: #ef8354;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 1rem;
-  letter-spacing: 10%;
-  background-color: #ef8354;
-  margin-left: 2%;
-  width: 10vw;
+.follow-button:hover {
+  background-color: #3a3f55;
 }
 #name-and-buttons {
-  width: 30vw;
+  width: 120%;
   display: flex;
+  margin-left: 2%;
   flex-direction: row;
   align-items: center;
 }
+#description-and-members {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
 #description {
   font-style: italic;
-  margin-left: 2%;
+  margin-left: 3%;
   font-size: 2em;
 }
 #members {
-  margin-left: 2%;
-  font-size: 2em;
+  margin-left: 3%;
+  font-size: 1.7em;
 }
 .genre-box {
   display: flex;
-  justify-self: flex-start;
-  margin-top: 4%;
+  padding-top: 4%;
 }
 .genre-box li {
   list-style: none;
@@ -252,7 +279,8 @@ export default {
 #create-note-button {
   padding: 0.75rem 1.25rem;
   border-radius: 10rem;
-  background-color: #ef8354;
+  border: none;
+  background-color: #2d3142;
   color: #fff;
   text-transform: uppercase;
   font-size: 1rem;
@@ -260,7 +288,7 @@ export default {
   border-color: #ef8354;
 }
 #create-note-button:hover {
-  background-color: #ee7642;
+  background-color: #3a3f55;
 }
 #create-note textarea {
   width: 50vw;
@@ -276,55 +304,62 @@ export default {
   font-size: 2em;
   padding: 2%;
 }
+.headline {
+  align-self: flex-start;
+  margin-left: 5%;
+  margin-top: 4%;
+  margin-bottom: 2%;
+  font-size: 1.8em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
 .upcoming-shows {
   display: flex;
   align-self: flex-start;
   flex-wrap: wrap;
   width: 75vw;
-  margin-left: 5%;
-  background-color: #2d3142;
+  margin-left: 2%;
   padding-top: 2%;
-  margin-bottom: 3%;
-  margin-top: 2%;
-}
-.upcoming-shows h2 {
-  margin-left: 5%;
-  margin-bottom: 3%;
-  font-size: 1.7em;
-  color: white;
-  writing-mode: vertical-rl;
-  text-orientation: upright;
+  border-radius: 20px;
 }
 .upcoming-shows ul li {
-  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   font-size: 1.5em;
+  list-style: none;
   color: white;
-  background: #ef8354;
-  padding-top: 10%;
-  border-radius: 100%;
-  text-align: center;
-  height: 15vh;
-  width: 15vw;
-  margin-right: 10%;
+  text-align: left;
+  border-left: 1px solid white;
+  height: 20vh;
+  width: 120%;
 }
-.picture-gallery h2 {
-  margin-left: 5%;
-  margin-bottom: 3%;
-  font-size: 1.7em;
-  color: white;
-  writing-mode: vertical-rl;
-  text-orientation: upright;
+#show-name {
+  color: #ee7642;
+  font-weight: 900;
+  padding-left: 5%;
+  margin-bottom: 2%;
 }
-#shows {
+#show-location {
+  font-weight: 700;
+  padding-left: 5%;
+}
+#show-date {
+  font-size: 0.85em;
+  padding-left: 5%;
+}
+#vl {
+  height: 20vh;
   margin-left: 2%;
+  border-left: 1px solid white;
+  align-self: flex-end;
 }
 .picture-gallery {
   display: flex;
   align-self: flex-start;
   flex-wrap: wrap;
   width: 75vw;
-  margin-left: 5%;
-  background-color: #2d3142;
+  margin-left: 2%;
   padding-top: 2%;
   margin-bottom: 5%;
 }
