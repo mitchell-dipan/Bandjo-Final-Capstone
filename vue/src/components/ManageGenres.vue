@@ -76,6 +76,7 @@ export default {
         MessageService.addGenreToData(newName);
         const g = {
           genreName: newName,
+          genreId: "",
         };
         this.genres.push(g);
         this.newGenre = "";
