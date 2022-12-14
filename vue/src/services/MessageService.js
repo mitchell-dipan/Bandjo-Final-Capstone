@@ -67,7 +67,12 @@ export default {
     deleteShow(id, showId) {
         return axios.delete(`/bands/${id}/deleteShows?showId=${showId}`)
     },
-
+    deleteGenres(genreName) {
+        return axios.delete(`/delete-genres?genreName=${genreName}`);
+    },
+    addGenreToData(genreName) {
+        return axios.post(`/add-genres?genreName=${genreName}`);
+    }
 
     // get(id) {
     //     return http.get(`/messages/${id}`);

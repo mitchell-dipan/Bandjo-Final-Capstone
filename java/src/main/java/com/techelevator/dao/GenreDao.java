@@ -18,4 +18,7 @@ public interface GenreDao {
 
     void deleteGenreFromBand(int id, int genreId);
 
+    void deleteGenreFromData(String genreName);
+
+    void addGenreToData(String genreName);
 }

@@ -151,10 +151,16 @@ public class BandjoController {
         showDao.deleteShowFromBand(id,showId);
     }
 
-//    @PreAuthorize("hasRole('USER')")
-//    @GetMapping(path = "/getrole")
-//    public User getRole(Principal principal){
-//        return userDao.findByUsername(principal.getName());
-//    }
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping(path = "/delete-genres")
+    public void deleteGenres(@RequestParam String genreName){
+        genreDao.deleteGenreFromData(genreName);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping(path = "/add-genres")
+    public void addGenres(@RequestParam String genreName){
+        genreDao.addGenreToData(genreName);
+    }
 
 }
