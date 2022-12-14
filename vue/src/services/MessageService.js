@@ -66,7 +66,8 @@ export default {
     },
     deleteShow(id, showId) {
         return axios.delete(`/bands/${id}/deleteShows?showId=${showId}`)
-    }
+    },
+
 
     // get(id) {
     //     return http.get(`/messages/${id}`);

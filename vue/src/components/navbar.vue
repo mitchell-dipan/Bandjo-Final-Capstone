@@ -8,7 +8,13 @@
     >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <router-link id="link" :to="{ name: 'create-band' }"
       >Create Band</router-link
-    >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    >
+    <div v-if="this.$store.state.user.id == 2">
+      <router-link id="link" :to="{ name: 'manage-genres' }"
+        >Manage Genres</router-link
+      >
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <router-link
       id="link"
       v-bind:to="{ name: 'logout' }"

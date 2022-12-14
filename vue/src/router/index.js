@@ -9,6 +9,7 @@ import BandSearch from '../views/BandSearch'
 import BandPage from '../views/BandPage'
 import MakeBand from '../views/MakeBand'
 import EditProfileView from '../views/EditProfileView'
+import ManageGenre from '../views/ManageGenre';
 
 
 Vue.use(Router)
@@ -86,6 +87,14 @@ const router = new Router({
       path: "/create",
       name: "create-band",
       component: MakeBand,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/manage-genres",
+      name: "manage-genres",
+      component: ManageGenre,
       meta: {
         requiresAuth: true
       }

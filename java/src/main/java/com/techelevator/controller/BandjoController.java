@@ -31,7 +31,7 @@ public class BandjoController {
         this.showDao = showDao;
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping(path = "/messages")
     public List<Message> getMessages(Principal principal, @RequestParam String sortBy){
 
@@ -39,115 +39,122 @@ public class BandjoController {
         return messageDao.findAllMessages(user.getId(), sortBy);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping(path = "/bands")
     public List<Band> getBands(){
         return bandDao.getAllBands();
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping(path = "/bands/{id}")
     public Band viewBandPage(@PathVariable int id){
         return bandDao.viewBandPage(id);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping(path = "/bands/{id}/pictures")
     public List<Pictures> getPicturesByBandId(@PathVariable int id){
         return picturesDao.getPicturesByBandId(id);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping(path = "/bands/{id}/genres")
     public List<Genre> getGenresByBandId(@PathVariable int id){
         return genreDao.getGenreByBandId(id);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping(path = "/bands/{id}/shows")
     public List<Show> getShowsByBandId(@PathVariable int id){
         return showDao.getShowsByBandId(id);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping(path = "/create")
     public Integer createNewBandPage(@RequestBody Band band){
          return bandDao.createBand(band);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping(path = "/create/{id}/picture")
     public void createNewPicture(@PathVariable int id, @RequestBody Pictures pictures){
             pictures.setBand_id(id);
             picturesDao.createPicture(pictures);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping(path = "/create/{id}/show")
     public void createNewShow(@PathVariable int id, @RequestBody Show show){
         show.setBandId(id);
         showDao.addShowForBand(show);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping(path = "/create/{id}/genre")
     public void addGenreToBand(@PathVariable int id, @RequestBody Genre genre){
         genreDao.addGenreToBand(genre.getGenreName(), id);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping(path = "/genres")
     public List<Genre> getGenres(){
         return genreDao.findAllGenres();
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping(path = "/follow")
     public void addFollower(@RequestParam int bandId, Principal principal){
         User user = userDao.findByUsername(principal.getName());
         bandDao.addFollower(bandId, user.getId());
     }
-    
-    @PreAuthorize("hasRole('USER')")
+
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @DeleteMapping(path ="/unfollow")
     public void unfollow(@RequestParam int bandId, Principal principal) {
         User user = userDao.findByUsername(principal.getName());
         bandDao.deleteFollower(bandId, user.getId());
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping(path ="/check")
     public boolean checkIfFollow(@RequestParam int bandId, Principal principal) {
         User user = userDao.findByUsername(principal.getName());
         return bandDao.isFollowing(bandId, user.getId());
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping(path = "/bands/{bandId}/sendMessage")
     public void sendMessage(@PathVariable int bandId, @RequestParam String messages){
         messageDao.sendMessage(messages, bandId);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PutMapping(path = "/bands/{id}/editProfile")
     public void updateBands(@PathVariable int id, @RequestBody Band band){
         bandDao.updateBand(id,band);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @DeleteMapping(path = "/bands/{id}/deleteGenre")
     public void deleteGenres(@PathVariable int id, @RequestParam int genreId){
         genreDao.deleteGenreFromBand(id,genreId);
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @DeleteMapping(path = "/bands/{id}/deletePictures")
     public void deletePictures(@PathVariable int id, @RequestParam int pictureId){
         picturesDao.deletePicturesFromBand(id,pictureId);
     }
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @DeleteMapping(path = "/bands/{id}/deleteShows")
     public void deleteShows(@PathVariable int id, @RequestParam int showId){
         showDao.deleteShowFromBand(id,showId);
     }
+
+//    @PreAuthorize("hasRole('USER')")
+//    @GetMapping(path = "/getrole")
+//    public User getRole(Principal principal){
+//        return userDao.findByUsername(principal.getName());
+//    }
+
 }
