@@ -51,11 +51,12 @@ export default {
     },
     deleteGenres() {
       this.chosenGenres.forEach((genre) => {
-        MessageService.deleteGenres(genre.genreName).then();
-        const index = this.genres.indexOf(genre);
-        this.genres.splice(index, 1);
+        MessageService.deleteGenres(genre.genreName).then(() => {
+          const index = this.genres.indexOf(genre);
+          this.genres.splice(index, 1);
+        });
+        this.chosenGenres = [];
       });
-      this.chosenGenres = [];
     },
     addGenre() {
       let newName = this.newGenre;
@@ -73,12 +74,14 @@ export default {
       if (bool) {
         return;
       } else {
-        MessageService.addGenreToData(newName);
-        const g = {
-          genreName: newName,
-          genreId: "",
-        };
-        this.genres.push(g);
+        MessageService.addGenreToData(newName).then(() => {
+          const g = {
+            genreName: newName,
+            genreId: "",
+          };
+          this.genres.push(g);
+        });
+
         this.newGenre = "";
       }
     },
