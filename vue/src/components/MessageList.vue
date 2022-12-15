@@ -110,7 +110,7 @@ main {
   flex-direction: column;
   align-items: center;
   margin-top: 5%;
-  width: 45vw;
+  width: 60vw;
 }
 #message-box {
   display: flex;
