@@ -73,7 +73,7 @@
             </div>
             <div id="show-name">{{ show.showName }} <br /></div>
             <div id="show-location">{{ show.showLocation }} <br /></div>
-            <button @click="deleteShow(show)">Delete Show</button>
+            <button @click="deleteShow(show)">Delete</button>
           </li>
         </ul>
         <div id="vl" v-if="this.shows.length > 0"></div>
@@ -252,7 +252,7 @@ export default {
   position: relative;
   flex-direction: column;
   align-items: center;
-  margin-left: 15%;
+  margin-left: 20%;
   width: 70%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;

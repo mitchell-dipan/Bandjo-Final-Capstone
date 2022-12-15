@@ -257,7 +257,7 @@ export default {
 .genre-box {
   align-self: flex-start;
   display: flex;
-  margin-left: 20%;
+  align-self: center;
   padding-top: 4%;
 }
 .genre-box li {
