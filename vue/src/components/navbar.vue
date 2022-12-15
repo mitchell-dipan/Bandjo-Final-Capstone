@@ -8,12 +8,13 @@
     >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <router-link id="link" :to="{ name: 'create-band' }"
       >Create Band</router-link
+    >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <router-link
+      v-if="this.$store.state.user.id == 2"
+      id="link"
+      :to="{ name: 'manage-genres' }"
+      >Manage Genres</router-link
     >
-    <div v-if="this.$store.state.user.id == 2">
-      <router-link id="link" :to="{ name: 'manage-genres' }"
-        >Manage Genres</router-link
-      >
-    </div>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <router-link
       id="link"
@@ -33,19 +34,20 @@ export default {};
   display: flex;
   position: fixed;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   width: 20%;
   height: 100vh;
   border-right: 2px solid white;
 }
 img {
-  width: 50%;
+  width: 70%;
 }
 #link:first-child {
   margin-top: 25%;
 }
 #link {
-  margin-left: 10%;
+  align-self: flex-start;
+  margin-left: 23%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   text-decoration: none;
@@ -53,6 +55,6 @@ img {
   font-size: 2em;
 }
 #link:hover {
-  background-color: gray;
+  text-decoration: underline;
 }
 </style>

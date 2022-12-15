@@ -16,7 +16,9 @@
         v-model="searchGenre.genreName"
         placeholder="Type any genre..."
       />
-
+      <h3 v-if="this.filteredGenres.length > 0" id="instructions">
+        Select genres to add
+      </h3>
       <div id="results-box">
         <div
           v-for="genre in filteredGenres"
@@ -28,13 +30,14 @@
           </p>
         </div>
       </div>
-
+      <h3 v-if="this.yourGenres.length > 0">Current Genres:</h3>
+      <h3 v-if="this.yourGenres.length > 0" id="instructions">
+        Select genres to undo
+      </h3>
       <div id="current-genres">
-        <h3>Current Genres:</h3>
         <div id="genre-list" v-for="genre in yourGenres" v-bind:key="genre.id">
-          <p>
+          <p @click="removeGenre(genre)">
             {{ genre.genreName }}
-            <button @click="removeGenre(genre)">X</button>
           </p>
         </div>
       </div>
@@ -249,21 +252,22 @@ export default {
   position: relative;
   flex-direction: column;
   align-items: center;
-  margin-left: 7%;
+  margin-left: 15%;
   width: 70%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: white;
 }
-#title {
-  font-weight: 400;
+.main h1 {
+  font-weight: lighter;
   font-size: 3em;
+  margin-bottom: 2%;
 }
 .main h2 {
   font-size: 2.5em;
-  font-weight: 400;
+  font-weight: lighter;
   margin-top: 1%;
-  margin-bottom: 1%;
+  margin-bottom: 2%;
 }
 .type {
   width: 70%;
@@ -280,21 +284,9 @@ export default {
   display: flex;
   align-items: center;
 }
-#current-genres {
-  display: flex;
-  align-items: center;
-  margin-top: 3%;
-  margin-bottom: 3%;
-}
-#current-genres h3 {
-  align-self: flex-start;
-}
-h3 {
-  font-size: 1.4em;
-  font-weight: lighter;
-}
-#current-genres p {
-  margin-left: 8%;
+.results p {
+  margin-top: 5%;
+  margin-left: 2%;
   padding-right: 1vw;
   padding-left: 1vw;
   padding-top: 1vh;
@@ -302,6 +294,36 @@ h3 {
   background-color: #ef8354;
   border-radius: 10px;
   font-weight: bold;
+  color: white;
+}
+#current-genres {
+  display: flex;
+  align-items: center;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  gap: 5px 50px;
+}
+h3 {
+  align-self: flex-start;
+  font-size: 1.4em;
+  font-weight: 500;
+}
+#instructions {
+  font-size: 1em;
+  font-weight: lighter;
+  font-style: italic;
+}
+#current-genres p {
+  margin-left: 8%;
+  width: 100%;
+  padding-right: 1vw;
+  padding-left: 1vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  background-color: #ef8354;
+  border-radius: 10px;
+  font-weight: bold;
+  text-align: center;
   color: white;
 }
 #current-genres button {
@@ -313,7 +335,7 @@ h3 {
   align-self: flex-start;
   flex-wrap: wrap;
   margin-left: 2%;
-  margin-bottom: 5%;
+  margin-bottom: 2%;
   padding-top: 2%;
   border-radius: 20px;
 }

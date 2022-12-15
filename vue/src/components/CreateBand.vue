@@ -35,6 +35,9 @@
           v-model="searchGenre.genreName"
           placeholder="Type any genre..."
         />
+        <h3 v-if="this.filteredGenres.length > 0" id="instructions">
+          Select genres to add
+        </h3>
         <div id="results-box">
           <div
             v-for="genre in filteredGenres"
@@ -45,12 +48,14 @@
           </div>
         </div>
       </div>
+      <h3 v-if="this.genres.length > 0">Current Genres:</h3>
+      <h3 v-if="this.genres.length > 0" id="instructions">
+        Select genres to undo
+      </h3>
       <div id="current-genres">
-        <h3>Current Genres:</h3>
         <div id="genre-list" v-for="genre in genres" v-bind:key="genre.id">
-          <p>
+          <p @click="removeGenre(genre)">
             {{ genre.genreName }}
-            <button @click="removeGenre(genre)">X</button>
           </p>
         </div>
       </div>
@@ -76,7 +81,7 @@
         />
       </div>
       <button class="button" @click="addShow()">Add Show</button>
-      <h3>Current Shows:</h3>
+      <h3 v-if="shows.length > 0">Current Shows:</h3>
       <div id="current-shows">
         <ul v-for="show in shows" v-bind:key="show.id">
           <li>
@@ -85,7 +90,7 @@
             </div>
             <div id="show-name">{{ show.showName }} <br /></div>
             <div id="show-location">{{ show.showLocation }} <br /></div>
-            <button @click="deleteShow(show)">Delete Show</button>
+            <button @click="deleteShow(show)">Delete</button>
           </li>
         </ul>
         <div id="vl" v-if="this.shows.length > 0"></div>
@@ -253,7 +258,7 @@ export default {
   position: relative;
   flex-direction: column;
   align-items: center;
-  margin-left: 18%;
+  margin-left: 22%;
   width: 70%;
   color: #fff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -265,6 +270,7 @@ export default {
   border-radius: 16px;
   padding: 3%;
   margin-top: 1%;
+  margin-bottom: 1%;
   font-size: 1.5em;
   background-color: white;
 }
@@ -287,12 +293,17 @@ export default {
 #current-genres {
   display: flex;
   align-items: center;
-  margin-top: 3%;
+  margin-top: 1%;
   margin-bottom: 3%;
 }
 h3 {
   font-size: 1.4em;
-  font-weight: 400;
+  font-weight: 500;
+}
+#instructions {
+  font-size: 1em;
+  font-weight: lighter;
+  font-style: italic;
 }
 #current-genres p {
   margin-left: 8%;
